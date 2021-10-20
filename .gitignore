@@ -1,5 +1,8 @@
 *.exe
 config.yml
+download/
+temp/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

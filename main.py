@@ -3,10 +3,19 @@ import sys
 import yaml
 
 from typing import Tuple
-from revas_selenium import RevasSelenium
+from revas_selenium import Revas_Selenium
 
-def loadConfig() -> Tuple[str, str, int]:
+def main() -> Tuple[str, str, int]:
     path = os.getcwd()
+    
+    try:
+        os.mkdir('temp')
+        os.mkdir('download')
+    except:
+        for f in os.listdir(os.path.join(os.getcwd(), 'temp')):
+            os.remove(os.path.join(os.getcwd(), 'temp', f))
+        for f in os.listdir(os.path.join(os.getcwd(), 'download')):
+            os.remove(os.path.join(os.getcwd(), 'download', f))
 
     try:
         with open(f'{path}/config.yml', 'r', encoding='utf-8') as file:
@@ -44,7 +53,31 @@ def loadConfig() -> Tuple[str, str, int]:
 
 
 if __name__ == '__main__':
-    USR_NAME, PASSWD, GAME_ID = loadConfig()
-    revasSelenium = RevasSelenium(USR_NAME, PASSWD, GAME_ID)
-    revasSelenium.login()
-    # revasSelenium.quit(2)
+    USR_NAME, PASSWD, GAME_ID = main()
+
+    revas_selenium = Revas_Selenium(USR_NAME, PASSWD, GAME_ID)
+
+    url = revas_selenium.login()
+    offer_count = revas_selenium.get_offer_count(url)
+    id = 0
+    i = 0
+
+    print(url)
+    print(offer_count)
+
+    while i < offer_count:
+        f = revas_selenium.get_xlsx(url, id)
+
+        if 'DB_SERVICE_0_NOT_FOUND' not in os.listdir(os.path.join(os.getcwd(), 'temp'))[0]:
+            os.rename(
+                os.path.join(os.getcwd(), 'temp', f),
+                os.path.join(os.getcwd(), 'download', f)
+            )
+            print(f'{id}: {f}')
+            i += 1
+        else:
+            os.remove(os.path.join(os.getcwd(), 'temp', f)) 
+
+        id += 1
+        
+    # revas_selenium.quit(2)
