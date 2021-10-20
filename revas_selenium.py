@@ -13,6 +13,9 @@ class RevasSelenium:
         self.browser = webdriver.Firefox()
         self.browser.get('https://gry.revas.pl/')
 
+        self.options = webdriver.FirefoxOptions()
+        
+
         self.usr_name = usr_name
         self.passwd = passwd
         self.game_id = game_id
@@ -24,6 +27,12 @@ class RevasSelenium:
         enter_game = WebDriverWait(self.browser, 1).until(
             EC.presence_of_element_located((By.ID, f'join_btn_{self.game_id}')))
         enter_game.click()
+        
+        url = self.browser.current_url
+        
+        print(url[:url.index('.pl/') + 4])
+        
+    # def getXSLX
 
     def quit(self, timeout: float = 0) -> NoReturn:
         sleep(timeout)
