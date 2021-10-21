@@ -5,9 +5,8 @@ __version__ = '1.0.0'
 import os
 import shutil
 
-
-from selebot.selebot_core import SelebotCore
-from selebot.revas_selenium import RevasSelenium
+from revasbot.revas_core import RevasCore
+from revasbot.revas_selenium import RevasSelenium
 
 def setup():
     try:
@@ -21,8 +20,8 @@ def setup():
     os.mkdir('download/offer')
     os.mkdir('download/suppliers')
 
-    selebot_core = SelebotCore()
-    user_name, password, game_id = selebot_core.config_loader()
+    revas_core = RevasCore()
+    user_name, password, game_id = revas_core.config_loader()
 
     revas_selenium = RevasSelenium(user_name, password, game_id)
 

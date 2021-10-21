@@ -1,5 +1,11 @@
 # SeleBot
 
+Install requirements:
+
+```ps
+pip install -r requirements.txt
+```
+
 Change Python file according to PEP-8 **IN-PLACE**:  
 
 ```ps

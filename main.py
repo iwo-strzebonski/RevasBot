@@ -11,10 +11,10 @@ Authors:
 Licensed under WTFPL
 '''
 
-import selebot
+import revasbot
 
 if __name__ == '__main__':
-    print(selebot.__authors__)
-    print(selebot.__version__)
-    print(selebot.__license__)
-    selebot.setup()
+    print(revasbot.__authors__)
+    print(revasbot.__version__)
+    print(revasbot.__license__)
+    revasbot.setup()

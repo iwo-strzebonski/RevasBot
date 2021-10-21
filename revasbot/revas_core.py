@@ -4,7 +4,9 @@ import os
 import sys
 import yaml
 
-class SelebotCore:
+from getpass import getpass
+
+class RevasCore:
     def __init__(self) -> None:
         self.path = os.getcwd()
 
@@ -14,7 +16,7 @@ class SelebotCore:
                 config = yaml.load(conf_file, Loader=yaml.FullLoader)
         except FileNotFoundError:
             usr_name = input('Type your Revas account username: ')
-            passwd = input('Type your Revas account password: ')
+            passwd = getpass('Type your Revas account password: ')
             game_id = input('Type your Revas game ID: ')
 
             with open(f'{self.path}/config.yml', 'w', encoding='utf-8') as conf_file:
