@@ -1,10 +1,11 @@
 from typing import Tuple
+from getpass import getpass
 
 import os
 import sys
 import yaml
 
-from getpass import getpass
+
 
 class RevasCore:
     def __init__(self) -> None:

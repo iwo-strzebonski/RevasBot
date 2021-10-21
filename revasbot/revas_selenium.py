@@ -17,7 +17,7 @@ class RevasSelenium:
             'offer': 'serviceID',
             'suppliers': 'partSupplierID'
         }
-        
+
         ff_prof = webdriver.FirefoxProfile()
 
         ff_prof.set_preference(
@@ -45,7 +45,7 @@ class RevasSelenium:
         self.usr_name = usr_name
         self.passwd = passwd
         self.game_id = game_id
-        
+
         self.url = ''
 
     def login(self) -> str:

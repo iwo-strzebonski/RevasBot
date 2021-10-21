@@ -8,6 +8,7 @@ import shutil
 from revasbot.revas_core import RevasCore
 from revasbot.revas_selenium import RevasSelenium
 
+
 def setup():
     try:
         shutil.rmtree('temp')
