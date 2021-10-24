@@ -6,7 +6,6 @@ import sys
 import yaml
 
 
-
 class RevasCore:
     def __init__(self) -> None:
         self.path = os.getcwd()
@@ -44,4 +43,8 @@ class RevasCore:
             print('Please provide user data!')
             sys.exit()
 
-        return config['USER'], config['PASSWD'], config['GAME_ID']
+        return (
+            str(config['USER']),
+            str(config['PASSWD']),
+            int(config['GAME_ID'])
+        )

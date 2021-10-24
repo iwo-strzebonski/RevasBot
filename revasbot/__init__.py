@@ -25,9 +25,8 @@ def setup():
     user_name, password, game_id = revas_core.config_loader()
 
     revas_selenium = RevasSelenium(user_name, password, game_id)
+    revas_selenium.login()
 
-    url = revas_selenium.login()
     revas_selenium.scrap_xlsxs()
 
-    print(url)
     # revas_selenium.quit(2)
