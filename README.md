@@ -1,4 +1,4 @@
-# SeleBot
+# RevasBot
 
 Install requirements:
 
