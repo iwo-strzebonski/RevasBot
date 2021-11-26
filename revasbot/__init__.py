@@ -6,7 +6,7 @@ import os
 import shutil
 
 from revasbot.revas_core import RevasCore
-from revasbot.revas_selenium import RevasSelenium
+from revasbot.revas_scrapper import RevasScrapper
 
 
 def setup():
@@ -19,14 +19,18 @@ def setup():
     os.mkdir('temp')
     os.mkdir('download')
     os.mkdir('download/offer')
+    os.mkdir('download/offer/emploees_tab')
+    os.mkdir('download/offer/parts_tab')
+    os.mkdir('download/offer/tool_tab')
     os.mkdir('download/suppliers')
+    os.mkdir('download/finance_bank')
 
     revas_core = RevasCore()
     user_name, password, game_id = revas_core.config_loader()
 
-    revas_selenium = RevasSelenium(user_name, password, game_id)
-    revas_selenium.login()
+    revas_scrapper = RevasScrapper(user_name, password, game_id)
+    revas_scrapper.login()
 
-    revas_selenium.scrap_xlsxs()
+    revas_scrapper.scrap_xlsxs()
 
-    # revas_selenium.quit(2)
+    # revas_scrapper.quit(2)

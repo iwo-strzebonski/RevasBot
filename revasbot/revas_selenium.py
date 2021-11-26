@@ -9,22 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-from revasbot.revas_pandas import RevasPandas
-
-
 class RevasSelenium:
     def __init__(self, usr_name: str, passwd: str, game_id: str) -> None:
-        self.id_name = {
-            'offer': 'serviceID',
-            'suppliers': 'partSupplierID'
-        }
-
-        self.offer_tabs = [
-            'tool_tab',
-            'emploees_tab',
-            'parts_tab'
-        ]
-
         ff_prof = webdriver.FirefoxProfile()
 
         ff_prof.set_preference(
@@ -44,7 +30,6 @@ class RevasSelenium:
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )
 
-        self.revas_pandas = RevasPandas
         self.driver = webdriver.Firefox(firefox_profile=ff_prof)
         self.driver.maximize_window()
 
@@ -68,81 +53,39 @@ class RevasSelenium:
         url = self.driver.current_url
         self.url = url[:url.index('.pl/') + 4]
 
-    def get_xlsx(self, item_id: int, mod: str, tab: str='empty') -> str:
+    def get_data_count(self, mod: str) -> int:
+        self.driver.get(self.url + mod + '.php')
+
+        try:
+            WebDriverWait(self.driver, 3).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'light-well-item')))
+
+            count = len(self.driver.find_elements_by_class_name('light-well-item'))
+        except TimeoutException:
+            count = 6
+        # else:
+        #    count = count if count else 6
+
+        return count
+
+    def get_xlsx(self, id_name: str, item_id: int, mod: str, tab: str='empty') -> str:
+        action = mod.replace('_', '-')
+
         download_url = \
             self.url + \
-            f'ajax.php?mod={mod}&action={mod}-export-to-exel&{self.id_name[mod]}=' + \
+            f'ajax.php?mod={mod}&action={action}-export-to-exel&{id_name}=' + \
             f'{str(item_id)}&tab={tab}&atype=json'
 
-        self.driver.set_page_load_timeout(3)
+        self.driver.set_page_load_timeout(2)
 
         try:
             self.driver.get(download_url)
         except TimeoutException:
-            sleep(2)
             return os.listdir(os.path.join(os.getcwd(), 'temp'))[0]
 
         return ''
 
-    def get_data_count(self, mod: str) -> int:
-        self.driver.get(self.url + mod + '.php')
-
-        WebDriverWait(self.driver, 3).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'light-well-item')))
-
-        return len(self.driver.find_elements_by_class_name('light-well-item'))
-
-    def scrap_xlsxs(self) -> None:
-        for key in self.id_name:
-            item_id = 0
-            i = 0
-            count = self.get_data_count(key)
-            count = count if count else 6
-
-            while i < count:
-                if key == 'offer':
-                    for tab in self.offer_tabs:
-                        spreadsheet = self.get_xlsx(item_id, key, tab)
-
-                        if 'NOT_FOUND' not in spreadsheet:
-                            self.revas_pandas.xlsx_to_csv(
-                                os.path.join(os.getcwd(), 'temp', spreadsheet),
-                                os.path.join(
-                                    os.getcwd(),
-                                    'download',
-                                    key,
-                                    spreadsheet.replace('.xlsx', f'-{tab}.csv')
-                                )
-                            )
-
-                            if self.offer_tabs.index(tab) == 2:
-                                i += 1
-
-                        os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
-
-                else:
-                    spreadsheet = self.get_xlsx(item_id, key)
-
-                    if 'NOT_FOUND' not in spreadsheet:
-                        self.revas_pandas.xlsx_to_csv(
-                            os.path.join(os.getcwd(), 'temp', spreadsheet),
-                            os.path.join(
-                                os.getcwd(),
-                                'download',
-                                key,
-                                spreadsheet.replace('.xlsx', '.csv')
-                            )
-                        )
-
-                        i += 1
-
-                    os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
-
-                item_id += 1
-
-        self.driver.get(self.url)
-
-    def quit(self, timeout: float = 0) -> None:
+    def quit(self, timeout: float=0) -> None:
         sleep(timeout)
 
         self.driver.quit()

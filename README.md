@@ -25,6 +25,12 @@ conda activate revasbot
 conda deactivate
 ```
 
+## Start Bot
+
+```ps
+python ./main.py
+```
+
 ## Change Python file according to PEP-8 **IN-PLACE**
 
 ```ps
