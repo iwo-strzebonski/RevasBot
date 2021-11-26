@@ -11,4 +11,3 @@ class RevasPandas:
         data.to_csv(sheet_to, index=True)
 
         print(pd.DataFrame(pd.read_csv(sheet_to)))
-

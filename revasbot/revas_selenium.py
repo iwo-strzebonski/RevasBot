@@ -19,6 +19,12 @@ class RevasSelenium:
             'suppliers': 'partSupplierID'
         }
 
+        self.offer_tabs = [
+            'tool_tab',
+            'emploees_tab',
+            'parts_tab'
+        ]
+
         ff_prof = webdriver.FirefoxProfile()
 
         ff_prof.set_preference(
@@ -62,12 +68,11 @@ class RevasSelenium:
         url = self.driver.current_url
         self.url = url[:url.index('.pl/') + 4]
 
-    def get_xlsx(self, item_id: int, mod: str) -> str:
+    def get_xlsx(self, item_id: int, mod: str, tab: str='empty') -> str:
         download_url = \
             self.url + \
             f'ajax.php?mod={mod}&action={mod}-export-to-exel&{self.id_name[mod]}=' + \
-            str(item_id) + \
-            '&tab=empty&atype=json'
+            f'{str(item_id)}&tab={tab}&atype=json'
 
         self.driver.set_page_load_timeout(3)
 
@@ -95,23 +100,43 @@ class RevasSelenium:
             count = count if count else 6
 
             while i < count:
-                spreadsheet = self.get_xlsx(item_id, key)
+                if key == 'offer':
+                    for tab in self.offer_tabs:
+                        spreadsheet = self.get_xlsx(item_id, key, tab)
 
-                if 'NOT_FOUND' not in spreadsheet:
-                    self.revas_pandas.xlsx_to_csv(
-                        os.path.join(os.getcwd(), 'temp', spreadsheet),
-                        os.path.join(
-                            os.getcwd(),
-                            'download',
-                            key,
-                            spreadsheet.replace('.xlsx', '.csv')
+                        if 'NOT_FOUND' not in spreadsheet:
+                            self.revas_pandas.xlsx_to_csv(
+                                os.path.join(os.getcwd(), 'temp', spreadsheet),
+                                os.path.join(
+                                    os.getcwd(),
+                                    'download',
+                                    key,
+                                    spreadsheet.replace('.xlsx', f'-{tab}.csv')
+                                )
+                            )
+
+                            if self.offer_tabs.index(tab) == 2:
+                                i += 1
+
+                        os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
+
+                else:
+                    spreadsheet = self.get_xlsx(item_id, key)
+
+                    if 'NOT_FOUND' not in spreadsheet:
+                        self.revas_pandas.xlsx_to_csv(
+                            os.path.join(os.getcwd(), 'temp', spreadsheet),
+                            os.path.join(
+                                os.getcwd(),
+                                'download',
+                                key,
+                                spreadsheet.replace('.xlsx', '.csv')
+                            )
                         )
-                    )
 
-                    print(f'{item_id}: {spreadsheet}')
-                    i += 1
+                        i += 1
 
-                os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
+                    os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
 
                 item_id += 1
 
