@@ -13,7 +13,7 @@ from revasbot.revas_pandas import RevasPandas
 
 
 class RevasSelenium:
-    def __init__(self, usr_name: str, passwd: str, game_id: int) -> None:
+    def __init__(self, usr_name: str, passwd: str, game_id: str) -> None:
         self.id_name = {
             'offer': 'serviceID',
             'suppliers': 'partSupplierID'

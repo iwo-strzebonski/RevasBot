@@ -1,24 +1,43 @@
 # RevasBot
 
-Install requirements:
+Revas Simulations made simple
+
+## Requirements
+
+* Newest `Anaconda` or `Miniconda`
+
+
+## Import Anaconda Virtual Environment
 
 ```ps
-pip install -r requirements.txt
+conda env create -f environment.yml
 ```
 
-Change Python file according to PEP-8 **IN-PLACE**:  
+## Activate Anaconda Virtual Environment
+
+```ps
+conda activate revasbot
+```
+
+## Deactivate Anaconda Virtual Environment
+
+```ps
+conda deactivate
+```
+
+## Change Python file according to PEP-8 **IN-PLACE**
 
 ```ps
 autopep8 <file_name> -i
 ```
 
-Check PyLint score:
+## Check PyLint score
 
 ```ps
 pylint <file_name>
 ```
 
-Check PyLint score with statistics:
+## Check PyLint score with statistics
 
 ```ps
 pylint <file_name> -r y

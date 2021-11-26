@@ -10,7 +10,7 @@ class RevasCore:
     def __init__(self) -> None:
         self.path = os.getcwd()
 
-    def config_loader(self) -> Tuple[str, str, int]:
+    def config_loader(self) -> Tuple[str, str, str]:
         try:
             with open(f'{self.path}/config.yml', 'r', encoding='utf-8') as conf_file:
                 config = yaml.load(conf_file, Loader=yaml.FullLoader)
@@ -46,5 +46,5 @@ class RevasCore:
         return (
             str(config['USER']),
             str(config['PASSWD']),
-            int(config['GAME_ID'])
+            str(config['GAME_ID'])
         )
