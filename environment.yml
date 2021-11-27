@@ -9,5 +9,4 @@ dependencies:
   - yaml
   - python=3.9.4
   - autopep8
-  - xlrd
-prefix: C:\Users\iwos0\.conda\envs\revasbot
+  - openpyxl

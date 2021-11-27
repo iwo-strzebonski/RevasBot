@@ -1,0 +1,24 @@
+finance_bank:
+  1: Historia rachunku.xlsx
+hr_employment:
+  1: "Lista pracownik\xF3w dost\u0119pnych na rynku pracy.xlsx"
+offer:
+  1: "Wymagania dotycz\u0105ce us\u0142ugi-Pizza.xlsx"
+  2: "Wymagania dotycz\u0105ce us\u0142ugi-Brownie.xlsx"
+  5: "Wymagania dotycz\u0105ce us\u0142ugi-Tiramisu.xlsx"
+  20: "Wymagania dotycz\u0105ce us\u0142ugi-Pierogi.xlsx"
+  21: "Wymagania dotycz\u0105ce us\u0142ugi-Woda.xlsx"
+  22: "Wymagania dotycz\u0105ce us\u0142ugi-Zestaw - Ryba, ziemniaki, zupa.xlsx"
+  23: "Wymagania dotycz\u0105ce us\u0142ugi-Szarlotka.xlsx"
+  30: "Wymagania dotycz\u0105ce us\u0142ugi-Piwo.xlsx"
+  31: "Wymagania dotycz\u0105ce us\u0142ugi-Zestaw - Kurczak, ziemniaki, zupa.xlsx"
+  32: "Wymagania dotycz\u0105ce us\u0142ugi-Zestaw - Schabowy, ziemniaki, zupa.xlsx"
+  33: "Wymagania dotycz\u0105ce us\u0142ugi-Kawa.xlsx"
+  35: "Wymagania dotycz\u0105ce us\u0142ugi-Lasagne.xlsx"
+suppliers:
+  1: Dostawca-FullService.xlsx
+  2: Dostawca-InterShop.xlsx
+  4: Dostawca-OfficeShop.xlsx
+  7: Dostawca-Traftixx.xlsx
+  8: Dostawca-DealTag.xlsx
+  9: Dostawca-Bis.xlsx

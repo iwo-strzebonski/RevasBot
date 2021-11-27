@@ -1,91 +1,109 @@
 import os
 
-from revasbot.revas_pandas import RevasPandas
 from revasbot.revas_selenium import RevasSelenium
+from revasbot.revas_core import RevasCore
+# from revasbot.revas_pandas import RevasPandas
 
 class RevasScrapper(RevasSelenium):
     def __init__(self, usr_name: str, passwd: str, game_id: str) -> None:
         super().__init__(usr_name, passwd, game_id)
 
-        self.id_names = {
-            'offer': 'serviceID',
-            'suppliers': 'partSupplierID',
-            'finance_bank': 'bankID'        # bankID = 1
-        }
-
-        self.offer_tabs = [
-            'tool_tab',
-            'emploees_tab',
-            'parts_tab'
-        ]
-
         self.special_pages = {
-            'hr_employment': 'hire',
-            'hr_training': 'decisions'
+            'offer': {
+                'id': 'serviceID',
+                'action': 'offer'
+            },
+            'suppliers': {
+                'id': 'partSupplierID',
+                'action': 'suppliers'
+            },
+            'finance_bank': {
+                'id': 'bankID',
+                'action': 'finance-bank'
+            },
+            'hr_employment': {
+                'id': 'positionID',
+                'action': 'employes'
+            }
+            # 'hr_training': 'decisions'
         }
 
-        self.revas_pandas = RevasPandas
+        self.revas_core = RevasCore
+        # self.revas_pandas = RevasPandas
 
-    def scrap_offer_info(self, item_id: int) -> int:
-        i = 0
+    def smart_scrap_xlsx(self, game_name: str) -> None:
+        config = self.revas_core.cache_loader(game_name)
 
-        for tab in self.offer_tabs:
-            spreadsheet = self.get_xlsx(self.id_names['offer'], item_id, 'offer', tab)
+        for key, id_list in config.items():
+            page_info = self.special_pages[key]
 
-            if 'NOT_FOUND' not in spreadsheet:
-                self.revas_pandas.xlsx_to_csv(
-                    os.path.join(os.getcwd(), 'temp', spreadsheet),
+            for item_id in id_list.keys():
+                item_data = (
+                    page_info['id'],
+                    item_id,
+                    key,
+                    page_info['action']
+                )
+                
+                spreadsheet = self.get_xlsx(item_data)
+                
+                os.rename(
+                    os.path.join('temp', spreadsheet),
                     os.path.join(
-                        os.getcwd(),
                         'download',
-                        'offer',
-                        tab,
-                        spreadsheet.replace('.xlsx', '.csv')
+                        key,
+                        spreadsheet
                     )
                 )
 
-                if self.offer_tabs.index(tab) == 2:
-                    i = 1
+                print(item_data)
 
-            os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
+    def scrap_xlsxs(self, game_name: str) -> None:
+        cache_data = {}
 
-            if 'NOT_FOUND' in spreadsheet:
-                return 0
+        for key, value in self.special_pages.items():
+            cache_data[key] = {}
 
-        return i
+            item_id = 0
+            count = 1
 
-    def scrap_xlsxs(self) -> None:
-        for id_key, id_name in self.id_names.items():
             i = 0
 
-            if id_key == 'finance_bank':
-                count = 1
+            if key == 'finance_bank':
+                item_id = 1
+            elif key == 'hr_employment':
                 item_id = 1
             else:
-                item_id = 0
-                count = self.get_data_count(id_key)
+                count = self.get_data_count(key)
 
             while i < count:
-                if id_key == 'offer':
-                    i += self.scrap_offer_info(item_id)
-                else:
-                    spreadsheet = self.get_xlsx(id_name, item_id, id_key)
+                item_data = (
+                    value['id'],
+                    str(item_id),
+                    key,
+                    value['action']
+                )
 
-                    if 'NOT_FOUND' not in spreadsheet:
-                        self.revas_pandas.xlsx_to_csv(
-                            os.path.join(os.getcwd(), 'temp', spreadsheet),
-                            os.path.join(
-                                os.getcwd(),
-                                'download',
-                                id_key,
-                                spreadsheet.replace('.xlsx', '.csv')
-                            )
+                spreadsheet = self.get_xlsx(item_data)
+
+                if 'NOT_FOUND' not in spreadsheet:
+                    cache_data[key][item_id] = spreadsheet
+                    print(str(item_id) + ': ' + spreadsheet)
+
+                    os.rename(
+                        os.path.join('temp', spreadsheet),
+                        os.path.join(
+                            'download',
+                            key,
+                            spreadsheet
                         )
+                    )
 
-                        i += 1
-
-                    os.remove(os.path.join(os.getcwd(), 'temp', spreadsheet))
+                    i += 1
+                else:
+                    os.remove(os.path.join('temp', spreadsheet))
 
                 item_id += 1
 
+        self.revas_core.cache_saver(game_name, cache_data)
         self.driver.get(self.url)

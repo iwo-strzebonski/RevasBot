@@ -1,6 +1,7 @@
 import sys
 import os
 from time import sleep
+from typing import Tuple
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -40,6 +41,7 @@ class RevasSelenium:
         self.game_id = game_id
 
         self.url = ''
+        self.game_name = ''
 
     def login(self) -> None:
         self.driver.find_element_by_id('logEmail').send_keys(self.usr_name)
@@ -51,7 +53,9 @@ class RevasSelenium:
         enter_game.click()
 
         url = self.driver.current_url
+
         self.url = url[:url.index('.pl/') + 4]
+        self.game_name = url[8 : url.index('.')]
 
     def get_data_count(self, mod: str) -> int:
         self.driver.get(self.url + mod + '.php')
@@ -63,18 +67,16 @@ class RevasSelenium:
             count = len(self.driver.find_elements_by_class_name('light-well-item'))
         except TimeoutException:
             count = 6
-        # else:
-        #    count = count if count else 6
 
         return count
 
-    def get_xlsx(self, id_name: str, item_id: int, mod: str, tab: str='empty') -> str:
-        action = mod.replace('_', '-')
+    def get_xlsx(self, item_data: Tuple[str, str, str, str]) -> str:
+        id_name, item_id, mod, action = item_data
 
         download_url = \
             self.url + \
             f'ajax.php?mod={mod}&action={action}-export-to-exel&{id_name}=' + \
-            f'{str(item_id)}&tab={tab}&atype=json'
+            f'{item_id}&tab=empty&atype=json'
 
         self.driver.set_page_load_timeout(2)
 

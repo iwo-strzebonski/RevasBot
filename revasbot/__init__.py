@@ -19,11 +19,9 @@ def setup():
     os.mkdir('temp')
     os.mkdir('download')
     os.mkdir('download/offer')
-    os.mkdir('download/offer/emploees_tab')
-    os.mkdir('download/offer/parts_tab')
-    os.mkdir('download/offer/tool_tab')
     os.mkdir('download/suppliers')
     os.mkdir('download/finance_bank')
+    os.mkdir('download/hr_employment')
 
     revas_core = RevasCore()
     user_name, password, game_id = revas_core.config_loader()
@@ -31,6 +29,14 @@ def setup():
     revas_scrapper = RevasScrapper(user_name, password, game_id)
     revas_scrapper.login()
 
-    revas_scrapper.scrap_xlsxs()
+    game_name = revas_scrapper.game_name
 
-    # revas_scrapper.quit(2)
+    if os.path.exists('cache') and os.listdir('cache'):
+        revas_scrapper.smart_scrap_xlsx(game_name)
+    else:
+        if not os.path.exists('cache'):
+            os.mkdir('cache')
+
+        revas_scrapper.scrap_xlsxs(game_name)
+
+    revas_scrapper.quit()

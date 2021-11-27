@@ -7,26 +7,26 @@ import yaml
 
 
 class RevasCore:
-    def __init__(self) -> None:
-        self.path = os.getcwd()
+    # def __init__(self) -> None:
+    #     pass
 
-    def config_loader(self) -> Tuple[str, str, str]:
+    @classmethod
+    def config_loader(cls) -> Tuple[str, str, str]:
         try:
-            with open(f'{self.path}/config.yml', 'r', encoding='utf-8') as conf_file:
+            with open('config.yml', 'r', encoding='utf-8') as conf_file:
                 config = yaml.load(conf_file, Loader=yaml.FullLoader)
+
         except FileNotFoundError:
             usr_name = input('Type your Revas account username: ')
             passwd = getpass('Type your Revas account password: ')
             game_id = input('Type your Revas game ID: ')
 
-            with open(f'{self.path}/config.yml', 'w', encoding='utf-8') as conf_file:
+            with open('config.yml', 'w', encoding='utf-8') as conf_file:
                 yaml.dump({
                     'USER': usr_name,
                     'PASSWD': passwd,
                     'GAME_ID': game_id
                 }, conf_file)
-
-                conf_file.close()
 
             if any(i == '' for i in [usr_name, passwd, game_id]):
                 print('Please provide user data!')
@@ -48,3 +48,15 @@ class RevasCore:
             str(config['PASSWD']),
             str(config['GAME_ID'])
         )
+
+    @classmethod
+    def cache_loader(cls, file_name: str) -> dict[str, dict[str, int]]:
+        with open(os.path.join('cache', file_name + '.yml'), 'r', encoding='utf-8') as cached_file:
+            config = yaml.load(cached_file, Loader=yaml.FullLoader)
+
+        return config
+
+    @classmethod
+    def cache_saver(cls, file_name: str, data: dict[str, dict[str, int]]) -> None:
+        with open(os.path.join('cache', file_name + '.yml'), 'w', encoding='utf-8') as cached_file:
+            yaml.dump(data, cached_file)
