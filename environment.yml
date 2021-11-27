@@ -6,7 +6,7 @@ dependencies:
   - pandas
   - selenium
   - pylint
-  - yaml
+  - pyaml
   - python=3.9.4
   - autopep8
   - openpyxl
