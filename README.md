@@ -5,6 +5,8 @@ Revas Simulations made simple
 ## Requirements
 
 * Newest `Anaconda` or `Miniconda`
+* `Mozilla Firefox`
+* `Mozilla GeckoDriver`
 
 
 ## Import Anaconda Virtual Environment
