@@ -1,52 +1,26 @@
 # RevasBot
 
-Revas Simulations made simple
+_Revas Simulations made simple_
 
-## Requirements
+Scrapped spreadsheets
 
-* Newest `Anaconda` or `Miniconda`
-* `Mozilla Firefox`
-* `Mozilla GeckoDriver`
+## List
 
-
-## Import Anaconda Virtual Environment
-
-```
-conda env create -f environment.yml
-```
-
-## Activate Anaconda Virtual Environment
-
-```
-conda activate revasbot
-```
-
-## Deactivate Anaconda Virtual Environment
-
-```
-conda deactivate
-```
-
-## Start Bot
-
-```
-python ./main.py
-```
-
-## Change Python file according to PEP-8 **IN-PLACE**
-
-```
-autopep8 <file_name> -i
-```
-
-## Check PyLint score
-
-```
-pylint <file_name>
-```
-
-## Check PyLint score with statistics
-
-```
-pylint <file_name> -r y
-```
+- [ ] Agencja eventowa  
+- [ ] Agencja interaktywna  
+- [ ] Biuro podróży  
+- [ ] Biuro rachunkowe  
+- [ ] Fabryka łożysk  
+- [ ] Firma remontowa  
+- [ ] Firma transportowa  
+- [ ] Gabinet masażu  
+- [ ] Hotelik  
+- [ ] Klinika weterynaryjna  
+- [x] Klub fitness  
+- [x] Restauracja  
+- [ ] Salon fryzjerski  
+- [ ] Salon kosmetyczny  
+- [x] Serwis IT  
+- [ ] Sklep z elektroniką  
+- [ ] Sklep rolniczy  
+- [ ] Warsztat samochodowy  
