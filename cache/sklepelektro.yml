@@ -1,0 +1,28 @@
+finance_bank:
+  1: Historia rachunku.xlsx
+hr_employment:
+  1: "Lista pracownik\xF3w dost\u0119pnych na rynku pracy.xlsx"
+offer:
+  3: "Wymagania dotycz\u0105ce us\u0142ugi-TV LED 40 cali.xlsx"
+  5: "Wymagania dotycz\u0105ce us\u0142ugi-Laptop 2w1 11,6 cala.xlsx"
+  9: "Wymagania dotycz\u0105ce us\u0142ugi-Smartfon.xlsx"
+  19: "Wymagania dotycz\u0105ce us\u0142ugi-Smartwatch.xlsx"
+  20: "Wymagania dotycz\u0105ce us\u0142ugi-TV LED 50 cali.xlsx"
+  21: "Wymagania dotycz\u0105ce us\u0142ugi-Tablet 11 cali.xlsx"
+  22: "Wymagania dotycz\u0105ce us\u0142ugi-Komputer stacjonarny PRO.xlsx"
+  23: "Wymagania dotycz\u0105ce us\u0142ugi-Smartfon PRO.xlsx"
+  24: "Wymagania dotycz\u0105ce us\u0142ugi-Komputer stacjonarny.xlsx"
+  30: "Wymagania dotycz\u0105ce us\u0142ugi-TV 4K 60 cali.xlsx"
+  32: "Wymagania dotycz\u0105ce us\u0142ugi-Zestaw Audio bez g\u0142o\u015Bnik\xF3\
+    w.xlsx"
+  34: "Wymagania dotycz\u0105ce us\u0142ugi-Laptop 13 cali.xlsx"
+  35: "Wymagania dotycz\u0105ce us\u0142ugi-Zestaw Audio z g\u0142o\u015Bnikami.xlsx"
+  36: "Wymagania dotycz\u0105ce us\u0142ugi-Kino domowe.xlsx"
+  37: "Wymagania dotycz\u0105ce us\u0142ugi-Laptop 15,6 cala.xlsx"
+suppliers:
+  1: Dostawca-FullService.xlsx
+  2: Dostawca-InterShop.xlsx
+  4: Dostawca-ElectroShop.xlsx
+  7: Dostawca-Kompix.xlsx
+  8: Dostawca-DealTag.xlsx
+  9: Dostawca-Bis.xlsx
