@@ -31,7 +31,7 @@ def setup():
 
     game_name = revas_scrapper.game_name
 
-    if os.path.exists(os.path.join('cache', game_name)):
+    if os.path.exists(os.path.join('cache', game_name + '.yml')):
         revas_scrapper.smart_scrap_xlsx(game_name)
     else:
         if not os.path.exists('cache'):

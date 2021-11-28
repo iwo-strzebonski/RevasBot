@@ -1,0 +1,27 @@
+finance_bank:
+  1: Historia rachunku.xlsx
+hr_employment:
+  1: "Lista pracownik\xF3w dost\u0119pnych na rynku pracy.xlsx"
+offer:
+  3: "Wymagania dotycz\u0105ce us\u0142ugi-Naprawa p\u0142yty g\u0142\xF3wnej.xlsx"
+  5: "Wymagania dotycz\u0105ce us\u0142ugi-Instalacja sterownik\xF3w.xlsx"
+  9: "Wymagania dotycz\u0105ce us\u0142ugi-Naprawa zasilacza do laptopa.xlsx"
+  19: "Wymagania dotycz\u0105ce us\u0142ugi-Odzyskiwanie danych uszkodzonych systemowo.xlsx"
+  20: "Wymagania dotycz\u0105ce us\u0142ugi-Usuwanie niechcianego oprogramowania.xlsx"
+  21: "Wymagania dotycz\u0105ce us\u0142ugi-Naprawa laptopa po zalaniu.xlsx"
+  22: "Wymagania dotycz\u0105ce us\u0142ugi-Instalacja systemu operacyjnego.xlsx"
+  23: "Wymagania dotycz\u0105ce us\u0142ugi-Wymiana matrycy.xlsx"
+  24: "Wymagania dotycz\u0105ce us\u0142ugi-Konfiguracja sieci oraz instalacja routera.xlsx"
+  30: "Wymagania dotycz\u0105ce us\u0142ugi-Optymalizacja komputera.xlsx"
+  32: "Wymagania dotycz\u0105ce us\u0142ugi-Wykonanie strony www wizyt\xF3wki.xlsx"
+  34: "Wymagania dotycz\u0105ce us\u0142ugi-Czyszczenie laptopa.xlsx"
+  35: "Wymagania dotycz\u0105ce us\u0142ugi-Wymiana gniazda zasilania.xlsx"
+  36: "Wymagania dotycz\u0105ce us\u0142ugi-Wykonanie strony www z CMS.xlsx"
+  37: "Wymagania dotycz\u0105ce us\u0142ugi-Administrowanie stron\u0105 www.xlsx"
+suppliers:
+  1: Dostawca-FullService.xlsx
+  2: Dostawca-InterShop.xlsx
+  4: Dostawca-ElectroShop.xlsx
+  7: Dostawca-Kompix.xlsx
+  8: Dostawca-DealTag.xlsx
+  9: Dostawca-Bis.xlsx

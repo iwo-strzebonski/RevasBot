@@ -1,0 +1,27 @@
+finance_bank:
+  1: Historia rachunku.xlsx
+hr_employment:
+  1: "Lista pracownik\xF3w dost\u0119pnych na rynku pracy.xlsx"
+offer:
+  1: "Wymagania dotycz\u0105ce us\u0142ugi-TRX br (wej\u015Bcie jednorazowe).xlsx"
+  2: "Wymagania dotycz\u0105ce us\u0142ugi-TBC br (wej\u015Bcie jednorazowe).xlsx"
+  5: "Wymagania dotycz\u0105ce us\u0142ugi-Kettlebell trening br (wej\u015Bcie jednorazowe).xlsx"
+  20: "Wymagania dotycz\u0105ce us\u0142ugi-Pilates br (wej\u015Bcie jednorazowe).xlsx"
+  21: "Wymagania dotycz\u0105ce us\u0142ugi-Bodybuilding br (wej\u015Bcie jednorazowe).xlsx"
+  22: "Wymagania dotycz\u0105ce us\u0142ugi-Trening - zdrowy kr\u0119gos\u0142up br\
+    \ (wej\u015Bcie jednorazowe).xlsx"
+  23: "Wymagania dotycz\u0105ce us\u0142ugi-Crossfit br (wej\u015Bcie jednorazowe).xlsx"
+  30: "Wymagania dotycz\u0105ce us\u0142ugi-Joga br (wej\u015Bcie jednorazowe).xlsx"
+  31: "Wymagania dotycz\u0105ce us\u0142ugi-Trening wzmacniaj\u0105cy br (wej\u015B\
+    cie jednorazowe).xlsx"
+  32: "Wymagania dotycz\u0105ce us\u0142ugi-Trening dla kobiet po ci\u0105\u017Cy\
+    \ br (wej\u015Bcie jednorazowe).xlsx"
+  33: "Wymagania dotycz\u0105ce us\u0142ugi-Step br (wej\u015Bcie jednorazowe).xlsx"
+  35: "Wymagania dotycz\u0105ce us\u0142ugi-Zumba br (wej\u015Bcie jednorazowe).xlsx"
+suppliers:
+  1: Dostawca-FullService.xlsx
+  2: Dostawca-InterShop.xlsx
+  4: Dostawca-OfficeShop.xlsx
+  7: Dostawca-Traftixx.xlsx
+  8: Dostawca-DealTag.xlsx
+  9: Dostawca-Bis.xlsx
