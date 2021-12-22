@@ -11,12 +11,10 @@ from revasbot.revas_scrapper import RevasScrapper
 
 def setup():
     try:
-        shutil.rmtree('temp')
         shutil.rmtree('download')
     except FileNotFoundError:
         pass
 
-    os.mkdir('temp')
     os.mkdir('download')
     os.mkdir('download/offer')
     os.mkdir('download/suppliers')

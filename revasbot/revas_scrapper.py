@@ -44,19 +44,18 @@ class RevasScrapper(RevasSelenium):
                     key,
                     page_info['action']
                 )
-                
+
                 spreadsheet = self.get_xlsx(item_data)
-                
+
                 os.rename(
-                    os.path.join('temp', spreadsheet),
+                    os.path.join(self.download_path, spreadsheet),
                     os.path.join(
+                        os.getcwd(),
                         'download',
                         key,
                         spreadsheet
                     )
                 )
-
-                print(item_data)
 
     def scrap_xlsxs(self, game_name: str) -> None:
         cache_data = {}
@@ -91,7 +90,7 @@ class RevasScrapper(RevasSelenium):
                     print(str(item_id) + ': ' + spreadsheet)
 
                     os.rename(
-                        os.path.join('temp', spreadsheet),
+                        os.path.join(self.download_path, spreadsheet),
                         os.path.join(
                             'download',
                             key,
@@ -101,7 +100,7 @@ class RevasScrapper(RevasSelenium):
 
                     i += 1
                 else:
-                    os.remove(os.path.join('temp', spreadsheet))
+                    os.remove(os.path.join(self.download_path, spreadsheet))
 
                 item_id += 1
 

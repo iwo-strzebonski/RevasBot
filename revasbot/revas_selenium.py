@@ -1,37 +1,26 @@
 import sys
 import os
 from time import sleep
+import time
 from typing import Tuple
 
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
+from msedge.selenium_tools import Edge, EdgeOptions
+# from selenium.webdriver import 
+# from selenium.webdriver.chrome.options import Options
+
 class RevasSelenium:
     def __init__(self, usr_name: str, passwd: str, game_id: str) -> None:
-        ff_prof = webdriver.FirefoxProfile()
+        options = EdgeOptions()
+        options.use_chromium = True
+        # options.headless = True
 
-        ff_prof.set_preference(
-            'browser.download.folderList',
-            2
-        )
-        ff_prof.set_preference(
-            'browser.download.manager.showWhenStarting',
-            False
-        )
-        ff_prof.set_preference(
-            'browser.download.dir',
-            os.path.join(os.getcwd(), 'temp')
-        )
-        ff_prof.set_preference(
-            'browser.helperApps.neverAsk.saveToDisk',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        )
-
-        self.driver = webdriver.Firefox(firefox_profile=ff_prof)
+        self.driver = Edge(options=options)
         self.driver.maximize_window()
 
         self.driver.get('https://gry.revas.pl/')
@@ -42,6 +31,7 @@ class RevasSelenium:
 
         self.url = ''
         self.game_name = ''
+        self.download_path = os.path.expanduser('~/Downloads')
 
     def login(self) -> None:
         self.driver.find_element_by_id('logEmail').send_keys(self.usr_name)
@@ -51,6 +41,10 @@ class RevasSelenium:
         enter_game = WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located((By.ID, f'join_btn_{self.game_id}')))
         enter_game.click()
+
+        WebDriverWait(self.driver, 1).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'game_url'))
+        )
 
         url = self.driver.current_url
 
@@ -78,12 +72,20 @@ class RevasSelenium:
             f'ajax.php?mod={mod}&action={action}-export-to-exel&{id_name}=' + \
             f'{item_id}&tab=empty&atype=json'
 
-        self.driver.set_page_load_timeout(2)
+        self.driver.set_page_load_timeout(1)
 
-        try:
-            self.driver.get(download_url)
-        except TimeoutException:
-            return os.listdir(os.path.join(os.getcwd(), 'temp'))[0]
+        self.driver.get(download_url)
+
+        time.sleep(0.5)
+
+        for down_file in os.listdir(os.path.join(self.download_path)):
+            if (
+                'Dostawca' in down_file or
+                'Wymagania dotyczące usługi' in down_file or
+                'Lista pracowników dostępnych na rynku pracy' in down_file or
+                'Historia rachunku' in down_file
+            ):
+                return down_file
 
         return ''
 
