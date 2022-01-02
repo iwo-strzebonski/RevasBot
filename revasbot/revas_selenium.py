@@ -119,7 +119,7 @@ class RevasSelenium:
 
         for row in rows:
             cells = row.find_elements(By.XPATH, './*')
-            
+
             if cells[0].tag_name == 'th':
                 arr.append([cell.text for cell in cells])
             else:
