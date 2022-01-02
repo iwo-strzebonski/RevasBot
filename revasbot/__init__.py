@@ -8,12 +8,25 @@ import shutil
 from revasbot.revas_core import RevasCore
 from revasbot.revas_scrapper import RevasScrapper
 
+def clear_xlsx() -> None:
+    download_path = os.path.expanduser('~/Downloads')
+
+    for down_file in os.listdir(download_path):
+        if (
+            'Dostawca' in down_file or
+            'Wymagania dotyczące usługi' in down_file or
+            'Lista pracowników dostępnych na rynku pracy' in down_file or
+            'Historia rachunku' in down_file
+        ):
+            os.remove(os.path.join(download_path, down_file))
 
 def setup():
     try:
         shutil.rmtree('download')
     except FileNotFoundError:
         pass
+
+    clear_xlsx()
 
     os.mkdir('download')
     os.mkdir('download/offer')

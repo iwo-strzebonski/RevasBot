@@ -16,6 +16,7 @@ from selenium.common.exceptions import TimeoutException
 
 from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
+from revasbot.revas_pandas import RevasPandas
 
 class RevasSelenium:
     def __init__(self, usr_name: str, passwd: str) -> None:
@@ -43,7 +44,7 @@ class RevasSelenium:
             By.ID, 'logPassword'
         ).send_keys(self.passwd + Keys.RETURN)
 
-        WebDriverWait(self.driver, 2).until(
+        WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'join_btn'))
         )
 
@@ -53,7 +54,7 @@ class RevasSelenium:
         self.get_schedule()
         self.driver.find_element(By.ID, f'join_btn_{self.game_id}').click()
 
-        WebDriverWait(self.driver, 2).until(
+        WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'game_url'))
         )
 
@@ -66,7 +67,7 @@ class RevasSelenium:
         self.driver.get(self.url + mod + '.php')
 
         try:
-            WebDriverWait(self.driver, 2).until(
+            WebDriverWait(self.driver, 3).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'light-well-item'))
             )
 
@@ -84,13 +85,12 @@ class RevasSelenium:
             f'ajax.php?mod={mod}&action={action}-export-to-exel&{id_name}=' + \
             f'{item_id}&tab=empty&atype=json'
 
-        self.driver.set_page_load_timeout(1)
-
+        self.driver.set_page_load_timeout(2)
         self.driver.get(download_url)
-
+        
         sleep(1)
 
-        for down_file in os.listdir(os.path.join(self.download_path)):
+        for down_file in os.listdir(self.download_path):
             if (
                 'Dostawca' in down_file or
                 'Wymagania dotyczące usługi' in down_file or
@@ -109,8 +109,35 @@ class RevasSelenium:
 
         self.driver.get(schedule_path)
 
-        WebDriverWait(self.driver, 2).until(
+        table = WebDriverWait(self.driver, 3).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'table-in-modal-dialog'))
+        )
+
+        rows = table.find_elements(By.TAG_NAME, 'tr')
+
+        arr = []
+
+        for row in rows:
+            cells = row.find_elements(By.XPATH, './*')
+            
+            if cells[0].tag_name == 'th':
+                arr.append([cell.text for cell in cells])
+            else:
+                arr.append([
+                    cells[0].text,
+                    cells[1].text,
+                    cells[2].find_element(By.XPATH, './*').tag_name == 'img'
+                ])
+
+            # print(cells[2].find_element(By.XPATH, './*').tag_name)
+
+        # print(dir(rows[0]))
+
+        # table_text = table.text.split('\n')
+
+        RevasPandas.muli_dim_arr_to_csv(
+            arr,
+            os.path.join(os.getcwd(), f'download/schedule/{self.game_id}.csv')
         )
 
         self.driver.get_screenshot_as_file(
