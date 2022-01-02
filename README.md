@@ -1,10 +1,10 @@
-# RevasBot
+# RevasBot Scrapped spreadsheets
 
 _Revas Simulations made simple_
 
-Scrapped spreadsheets
+Now with **SPEED**
 
-## List
+## Scrapped Games List
 
 - [ ] Agencja eventowa  
 - [ ] Agencja interaktywna  
