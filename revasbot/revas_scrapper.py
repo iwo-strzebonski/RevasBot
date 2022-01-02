@@ -1,12 +1,13 @@
 import os
 
+from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_selenium import RevasSelenium
 from revasbot.revas_core import RevasCore
 # from revasbot.revas_pandas import RevasPandas
 
 class RevasScrapper(RevasSelenium):
-    def __init__(self, usr_name: str, passwd: str, game_id: str) -> None:
-        super().__init__(usr_name, passwd, game_id)
+    def __init__(self, usr_name: str, passwd: str) -> None:
+        super().__init__(usr_name, passwd)
 
         self.special_pages = {
             'offer': {
@@ -28,11 +29,10 @@ class RevasScrapper(RevasSelenium):
             # 'hr_training': 'decisions'
         }
 
-        self.revas_core = RevasCore
         # self.revas_pandas = RevasPandas
 
     def smart_scrap_xlsx(self, game_name: str) -> None:
-        config = self.revas_core.cache_loader(game_name)
+        config = RevasCore.cache_loader(game_name)
 
         for key, id_list in config.items():
             page_info = self.special_pages[key]
@@ -87,7 +87,7 @@ class RevasScrapper(RevasSelenium):
 
                 if 'NOT_FOUND' not in spreadsheet:
                     cache_data[key][item_id] = spreadsheet
-                    print(str(item_id) + ': ' + spreadsheet)
+                    console.debug(str(item_id) + ': ' + spreadsheet)
 
                     os.rename(
                         os.path.join(self.download_path, spreadsheet),
@@ -104,5 +104,5 @@ class RevasScrapper(RevasSelenium):
 
                 item_id += 1
 
-        self.revas_core.cache_saver(game_name, cache_data)
+        RevasCore.cache_saver(game_name, cache_data)
         self.driver.get(self.url)

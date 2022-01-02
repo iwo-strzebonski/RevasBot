@@ -1,48 +1,59 @@
 import sys
 import os
 from time import sleep
-import time
 from typing import Tuple
+
+from selenium.webdriver import Edge
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
 from selenium.common.exceptions import TimeoutException
 
-from msedge.selenium_tools import Edge, EdgeOptions
-# from selenium.webdriver import 
-# from selenium.webdriver.chrome.options import Options
+from revasbot.revas_console import RevasConsole as console
+from revasbot.revas_core import RevasCore
 
 class RevasSelenium:
-    def __init__(self, usr_name: str, passwd: str, game_id: str) -> None:
-        options = EdgeOptions()
-        options.use_chromium = True
-        # options.headless = True
+    def __init__(self, usr_name: str, passwd: str) -> None:
+        caps = DesiredCapabilities().EDGE.copy()
+        caps['pageLoadStrategy'] = 'eager'
 
-        self.driver = Edge(options=options)
-        self.driver.maximize_window()
+        self.driver = Edge(capabilities=caps)
+        # self.driver.maximize_window()
+        self.driver.set_window_size(800, 600)
+        self.driver.minimize_window()
 
         self.driver.get('https://gry.revas.pl/')
 
         self.usr_name = usr_name
         self.passwd = passwd
-        self.game_id = game_id
 
         self.url = ''
         self.game_name = ''
+        self.game_id = ''
         self.download_path = os.path.expanduser('~/Downloads')
 
     def login(self) -> None:
-        self.driver.find_element_by_id('logEmail').send_keys(self.usr_name)
-        self.driver.find_element_by_id(
-            'logPassword').send_keys(self.passwd + Keys.RETURN)
+        self.driver.find_element(By.ID, 'logEmail').send_keys(self.usr_name)
+        self.driver.find_element(
+            By.ID, 'logPassword'
+        ).send_keys(self.passwd + Keys.RETURN)
 
-        enter_game = WebDriverWait(self.driver, 3).until(
-            EC.presence_of_element_located((By.ID, f'join_btn_{self.game_id}')))
-        enter_game.click()
+        WebDriverWait(self.driver, 2).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'join_btn'))
+        )
 
-        WebDriverWait(self.driver, 1).until(
+        games = RevasCore.get_games(self.driver)
+        self.game_id = RevasCore.choose_game(games)
+
+        self.get_schedule()
+        self.driver.find_element(By.ID, f'join_btn_{self.game_id}').click()
+
+        WebDriverWait(self.driver, 2).until(
             EC.presence_of_element_located((By.CLASS_NAME, 'game_url'))
         )
 
@@ -55,10 +66,11 @@ class RevasSelenium:
         self.driver.get(self.url + mod + '.php')
 
         try:
-            WebDriverWait(self.driver, 3).until(
-                EC.presence_of_element_located((By.CLASS_NAME, 'light-well-item')))
+            WebDriverWait(self.driver, 2).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'light-well-item'))
+            )
 
-            count = len(self.driver.find_elements_by_class_name('light-well-item'))
+            count = len(self.driver.find_elements(By.CLASS_NAME, 'light-well-item'))
         except TimeoutException:
             count = 6
 
@@ -76,7 +88,7 @@ class RevasSelenium:
 
         self.driver.get(download_url)
 
-        time.sleep(0.5)
+        sleep(1)
 
         for down_file in os.listdir(os.path.join(self.download_path)):
             if (
@@ -88,6 +100,26 @@ class RevasSelenium:
                 return down_file
 
         return ''
+
+    def get_schedule(self) -> None:
+        schedule_path = self.driver.find_element(
+            By.XPATH,
+            f'//TR[TD/BUTTON/@playergameid={self.game_id}]/TD/A[@data-toggle]'
+        ).get_attribute('href')
+
+        self.driver.get(schedule_path)
+
+        WebDriverWait(self.driver, 2).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'table-in-modal-dialog'))
+        )
+
+        self.driver.get_screenshot_as_file(
+            os.path.join(os.getcwd(), f'download/schedule/{self.game_id}.png')
+        )
+        self.driver.minimize_window()
+
+        console.debug(schedule_path)
+        self.driver.back()
 
     def quit(self, timeout: float=0) -> None:
         sleep(timeout)

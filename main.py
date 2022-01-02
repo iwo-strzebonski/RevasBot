@@ -12,9 +12,10 @@ Licensed under WTFPL
 '''
 
 import revasbot
+from revasbot.revas_console import RevasConsole as console
 
 if __name__ == '__main__':
-    print(revasbot.__authors__)
-    print(revasbot.__version__)
-    print(revasbot.__license__)
+    console.info(str(revasbot.__authors__))
+    console.info(revasbot.__version__)
+    console.info(revasbot.__license__)
     revasbot.setup()

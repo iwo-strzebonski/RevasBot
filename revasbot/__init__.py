@@ -1,6 +1,6 @@
-__authors__ = ['iwo-strzebonski', 'raphaelsanti-source']
+__authors__ = ['iwo-strzebonski']
 __license__ = 'WTFLP'
-__version__ = '1.0.0'
+__version__ = '2.0.4'
 
 import os
 import shutil
@@ -20,11 +20,11 @@ def setup():
     os.mkdir('download/suppliers')
     os.mkdir('download/finance_bank')
     os.mkdir('download/hr_employment')
+    os.mkdir('download/schedule')
 
-    revas_core = RevasCore()
-    user_name, password, game_id = revas_core.config_loader()
+    user_name, password = RevasCore.config_loader()
 
-    revas_scrapper = RevasScrapper(user_name, password, game_id)
+    revas_scrapper = RevasScrapper(user_name, password)
     revas_scrapper.login()
 
     game_name = revas_scrapper.game_name

@@ -1,5 +1,6 @@
 *.exe
 config.yml
+sequences.txt
 download/
 temp/
 .vscode/
