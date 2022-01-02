@@ -1,6 +1,6 @@
 __authors__ = ['iwo-strzebonski']
 __license__ = 'WTFLP'
-__version__ = '2.0.4'
+__version__ = '2.0.2'
 
 import os
 import shutil

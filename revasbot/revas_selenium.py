@@ -126,7 +126,8 @@ class RevasSelenium:
                 arr.append([
                     cells[0].text,
                     cells[1].text,
-                    cells[2].find_element(By.XPATH, './*').tag_name == 'img'
+                    not (cells[2].find_element(By.XPATH, './*').tag_name == 'hr' or
+                    'blocked' in cells[2].find_element(By.XPATH, './*').get_attribute('src'))
                 ])
 
             # print(cells[2].find_element(By.XPATH, './*').tag_name)

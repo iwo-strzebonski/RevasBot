@@ -1,6 +1,6 @@
 # RevasBot
 
-Revas Simulations made simple
+_Revas Simulations made simple_
 
 Now with **SPEED**
 
@@ -8,7 +8,7 @@ Now with **SPEED**
 
 ## Requirements
 
-* Newest `Anaconda` or `Miniconda` **OR** Python 3.9.7
+* Newest `Anaconda` or `Miniconda` **OR** Python 3.9.9
 * `Microsoft Edge` (HA!)
 * `Microsoft Edge Driver`
 
@@ -73,7 +73,7 @@ pip install -r requirements.txt
 #### Export PIP package list
 
 ```cmd
-pip freeze > requirements.txt
+pip list --format=freeze > requirements.txt
 ```
 
 ***
@@ -102,7 +102,7 @@ you need to install [ansicon](https://github.com/adoxa/ansicon/).
 
 ### Change Python file according to PEP-8 **IN-PLACE**
 
-```
+```cmd
 autopep8 <file_name> -i
 ```
 
