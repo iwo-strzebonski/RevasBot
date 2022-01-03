@@ -36,7 +36,7 @@ class RevasSelenium:
         self.url = ''
         self.game_name = ''
         self.game_id = ''
-        self.download_path = os.path.expanduser('~/Downloads')
+        self.download_path = RevasCore.home_path()
 
     def login(self) -> None:
         self.driver.find_element(By.ID, 'logEmail').send_keys(self.usr_name)

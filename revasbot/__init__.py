@@ -1,6 +1,6 @@
-__authors__ = ['iwo-strzebonski']
+__authors__ = ['iwo-strzebonski', 'hoxton314']
 __license__ = 'WTFLP'
-__version__ = '2.0.2'
+__version__ = '2.0.3'
 
 import os
 import shutil
@@ -9,7 +9,7 @@ from revasbot.revas_core import RevasCore
 from revasbot.revas_scrapper import RevasScrapper
 
 def clear_xlsx() -> None:
-    download_path = os.path.expanduser('~/Downloads')
+    download_path = RevasCore.home_path()
 
     for down_file in os.listdir(download_path):
         if (

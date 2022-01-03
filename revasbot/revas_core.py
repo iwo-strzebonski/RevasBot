@@ -2,6 +2,7 @@ from typing import Tuple
 
 import os
 import sys
+import platform
 import yaml
 
 from selenium.webdriver.common.by import By
@@ -96,3 +97,19 @@ class RevasCore:
 
         console.debug(games[game_number - 1]['game_id'])
         return games[game_number - 1]['game_id']
+
+    @classmethod
+    def home_path(cls) -> str:
+        if platform.system() == 'Windows':
+            import winreg
+
+            key = winreg.OpenKey(
+                winreg.HKEY_CURRENT_USER,
+                r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'
+            )
+
+            directory, _qtype = winreg.QueryValueEx(key, '{374DE290-123F-4565-9164-39C4925E467B}')
+
+            return directory
+
+        return os.path.expanduser('~/Downloads')
