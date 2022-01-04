@@ -50,14 +50,20 @@ class RevasCore:
 
     @classmethod
     def cache_loader(cls, file_name: str) -> dict[str, dict[str, int]]:
-        with open(os.path.join('cache', file_name + '.yml'), 'r', encoding='utf-8') as cached_file:
+        with open(
+            os.path.join('cache', file_name + '.yml'),
+            'r', encoding='utf-8'
+        ) as cached_file:
             config = yaml.load(cached_file, Loader=yaml.FullLoader)
 
         return config
 
     @classmethod
     def cache_saver(cls, file_name: str, data: dict[str, dict[str, int]]) -> None:
-        with open(os.path.join('cache', file_name + '.yml'), 'w', encoding='utf-8') as cached_file:
+        with open(
+            os.path.join('cache', file_name + '.yml'),
+            'w', encoding='utf-8'
+        ) as cached_file:
             yaml.dump(data, cached_file)
 
     @classmethod
@@ -77,7 +83,7 @@ class RevasCore:
         ]
 
     @classmethod
-    def choose_game(cls, games: list[dict[str, str]]) -> str:
+    def choose_game(cls, games: list[dict[str, str]]) -> tuple[str, str]:
         console.header('Choose a game to start:')
 
         game_number = None
@@ -94,8 +100,11 @@ class RevasCore:
             except ValueError:
                 game_number = None
 
-        console.debug(games[game_number - 1]['game_id'])
-        return games[game_number - 1]['game_id']
+        # console.debug(games[game_number - 1]['game_id'])
+        return (
+            games[game_number - 1]['game_id'],
+            games[game_number - 1]['company_name']
+        )
 
     @classmethod
     def home_path(cls) -> str:

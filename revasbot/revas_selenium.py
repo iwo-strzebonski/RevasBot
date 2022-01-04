@@ -14,11 +14,19 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.common.exceptions import TimeoutException
 
-from revasbot.revas_console import RevasConsole as console
+# from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
 from revasbot.revas_pandas import RevasPandas
 
 class RevasSelenium:
+    usr_name = ''
+    passwd = ''
+    url = ''
+    game_name = ''
+    game_id = ''
+    company_name = ''
+    round_no = 0
+
     def __init__(self, usr_name: str, passwd: str) -> None:
         caps = DesiredCapabilities().EDGE.copy()
         caps['pageLoadStrategy'] = 'eager'
@@ -33,11 +41,6 @@ class RevasSelenium:
         self.usr_name = usr_name
         self.passwd = passwd
 
-        self.url = ''
-        self.game_name = ''
-        self.game_id = ''
-        self.download_path = RevasCore.home_path()
-
     def login(self) -> None:
         self.driver.find_element(By.ID, 'logEmail').send_keys(self.usr_name)
         self.driver.find_element(
@@ -49,19 +52,20 @@ class RevasSelenium:
         )
 
         games = RevasCore.get_games(self.driver)
-        self.game_id = RevasCore.choose_game(games)
+        self.game_id, self.company_name = RevasCore.choose_game(games)
 
         self.get_schedule()
         self.driver.find_element(By.ID, f'join_btn_{self.game_id}').click()
 
-        WebDriverWait(self.driver, 3).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'game_url'))
-        )
+        round_no = WebDriverWait(self.driver, 3).until(
+            EC.presence_of_element_located((By.CLASS_NAME, 'tab-month-round'))
+        ).text.split()[2]
 
         url = self.driver.current_url
 
         self.url = url[:url.index('.pl/') + 4]
         self.game_name = url[8 : url.index('.')]
+        self.round_no = int(round_no)
 
     def get_data_count(self, mod: str) -> int:
         self.driver.get(self.url + mod + '.php')
@@ -90,7 +94,7 @@ class RevasSelenium:
 
         sleep(1)
 
-        for down_file in os.listdir(self.download_path):
+        for down_file in os.listdir(RevasCore.home_path()):
             if (
                 'Dostawca' in down_file or
                 'Wymagania dotyczące usługi' in down_file or
@@ -106,6 +110,8 @@ class RevasSelenium:
             By.XPATH,
             f'//TR[TD/BUTTON/@playergameid={self.game_id}]/TD/A[@data-toggle]'
         ).get_attribute('href')
+
+        # console.debug(schedule_path)
 
         self.driver.get(schedule_path)
 
@@ -130,24 +136,43 @@ class RevasSelenium:
                     'blocked' in cells[2].find_element(By.XPATH, './*').get_attribute('src'))
                 ])
 
-            # print(cells[2].find_element(By.XPATH, './*').tag_name)
-
-        # print(dir(rows[0]))
-
-        # table_text = table.text.split('\n')
-
         RevasPandas.muli_dim_arr_to_csv(
             arr,
-            os.path.join(os.getcwd(), f'download/schedule/{self.game_id}.csv')
+            f'download/schedule/{self.game_id}.csv'
         )
 
         self.driver.get_screenshot_as_file(
-            os.path.join(os.getcwd(), f'download/schedule/{self.game_id}.png')
+            f'download/schedule/{self.game_id}.png'
         )
-        self.driver.minimize_window()
 
-        console.debug(schedule_path)
+        self.driver.minimize_window()
         self.driver.back()
+
+    def get_scores(self) -> dict[str, dict[str, int]]:
+        self.driver.get(f'{self.url}ajax.php?mod=sale&tab=results')
+
+        scores = [
+            i.get_attribute('data-title')
+            for i in self.driver.find_elements(
+                By.XPATH, './/div[contains(@class, "group_well_item_title")]/i'
+            )
+        ]
+
+        data = [
+            {
+                row.find_elements(
+                    By.TAG_NAME, 'td'
+                )[0].text: int(row.find_elements(
+                    By.TAG_NAME, 'td'
+                )[1].text)
+                for row in body.find_elements(By.TAG_NAME, 'tr')
+            }
+            for body in self.driver.find_elements(By.TAG_NAME, 'tbody')
+        ]
+
+        self.driver.back()
+
+        return dict(zip(scores, data))
 
     def quit(self, timeout: float=0) -> None:
         sleep(timeout)

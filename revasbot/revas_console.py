@@ -1,4 +1,5 @@
 from getpass import getpass
+from typing import Any
 
 class CLIColors:  # pylint: disable=too-few-public-methods
     '''
@@ -50,40 +51,40 @@ class CLIColors:  # pylint: disable=too-few-public-methods
 
 class RevasConsole:
     @classmethod
-    def ok(cls, mesg: str) -> None:
+    def ok(cls, mesg: Any) -> None:
         print(f'{CLIColors.Foreground.Bright.GREEN}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def debug(cls, mesg: str) -> None:
+    def debug(cls, mesg: Any) -> None:
         print(f'{CLIColors.Foreground.Bright.BLACK}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def warn(cls, mesg: str) -> None:
+    def warn(cls, mesg: Any) -> None:
         print(f'{CLIColors.Foreground.Normal.YELLOW}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def error(cls, mesg: str) -> None:
+    def error(cls, mesg: Any) -> None:
         print(f'{CLIColors.Foreground.Bright.RED}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def header(cls, mesg: str) -> None:
+    def header(cls, mesg: Any) -> None:
         print(f'{CLIColors.Foreground.Bright.MAGENTA}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def list(cls, messages: list[str]) -> None:
+    def list(cls, messages: list[Any]) -> None:
         for i, msg in enumerate(messages):
             print(
                 f'{CLIColors.Background.Normal.MAGENTA}{i + 1}){CLIColors.ENDC} {CLIColors.Foreground.Normal.MAGENTA}{msg}{CLIColors.ENDC}'
             )
 
     @classmethod
-    def info(cls, mesg: str) -> None:
+    def info(cls, mesg: Any) -> None:
         print(f'{CLIColors.Foreground.Bright.CYAN}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def input(cls, mesg: str) -> str:
+    def input(cls, mesg: Any) -> Any:
         return input(f'{CLIColors.Foreground.Bright.CYAN}{mesg}{CLIColors.ENDC}')
 
     @classmethod
-    def getpass(cls, mesg: str) -> str:
+    def getpass(cls, mesg: Any) -> Any:
         return getpass(f'{CLIColors.Foreground.Bright.CYAN}{mesg}{CLIColors.ENDC}')

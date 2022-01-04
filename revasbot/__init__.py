@@ -1,11 +1,12 @@
 __authors__ = ['iwo-strzebonski', 'hoxton314']
 __license__ = 'WTFLP'
-__version__ = '2.0.3'
+__version__ = '2.0.4'
 
 import os
 import shutil
 
 from revasbot.revas_core import RevasCore
+from revasbot.revas_selenium import RevasSelenium
 from revasbot.revas_scrapper import RevasScrapper
 
 def clear_xlsx() -> None:
@@ -34,15 +35,20 @@ def setup():
     os.mkdir('download/finance_bank')
     os.mkdir('download/hr_employment')
     os.mkdir('download/schedule')
+    os.mkdir('download/scores')
 
     user_name, password = RevasCore.config_loader()
 
-    revas_scrapper = RevasScrapper(user_name, password)
-    revas_scrapper.login()
+    revas_selenium = RevasSelenium(user_name, password)
+    revas_selenium.login()
 
-    game_name = revas_scrapper.game_name
+    revas_scrapper = RevasScrapper(revas_selenium)
 
-    if os.path.exists(os.path.join('cache', game_name + '.yml')):
+    game_name = revas_selenium.game_name
+
+    revas_scrapper.scrap_scores()
+
+    if os.path.exists(f'cache/{revas_selenium.game_name}.yml'):
         revas_scrapper.smart_scrap_xlsx(game_name)
     else:
         if not os.path.exists('cache'):
@@ -50,4 +56,4 @@ def setup():
 
         revas_scrapper.scrap_xlsxs(game_name)
 
-    revas_scrapper.quit()
+    revas_selenium.quit()
