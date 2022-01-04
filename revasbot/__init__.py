@@ -1,4 +1,4 @@
-__authors__ = ['iwo-strzebonski', 'hoxton314']
+__authors__ = ['iwo-strzebonski', 'hoxton314', 'raphaelsanti-source']
 __license__ = 'WTFLP'
 __version__ = '2.0.4'
 

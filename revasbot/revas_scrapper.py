@@ -104,9 +104,9 @@ class RevasScrapper:
     def scrap_scores(self) -> None:
         if self.revas_selenium.round_no > 2:
             scores = self.revas_selenium.get_scores()
-            RevasPandas.dict_to_csv(
+            RevasPandas.dict_to_xlsx(
                 scores,
-                f'download/scores/scores_round_{self.revas_selenium.round_no}.xlsx'
+                f'download/scores/sales_round_{self.revas_selenium.round_no}.xlsx'
             )
             # https://restauracja.revas.pl/ajax.php?mod=sale&tab=results
         else:
