@@ -6,13 +6,12 @@ import platform
 import yaml
 
 from selenium.webdriver.common.by import By
-
 from revasbot.revas_console import RevasConsole as console
 
-class RevasCore:
-    # def __init__(self) -> None:
-    #     pass
+if platform.system() == 'Windows':
+    import winreg
 
+class RevasCore:
     @classmethod
     def config_loader(cls) -> Tuple[str, str]:
         try:
@@ -101,8 +100,6 @@ class RevasCore:
     @classmethod
     def home_path(cls) -> str:
         if platform.system() == 'Windows':
-            import winreg
-
             key = winreg.OpenKey(
                 winreg.HKEY_CURRENT_USER,
                 r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders'

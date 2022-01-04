@@ -87,7 +87,7 @@ class RevasSelenium:
 
         self.driver.set_page_load_timeout(2)
         self.driver.get(download_url)
-        
+
         sleep(1)
 
         for down_file in os.listdir(self.download_path):
