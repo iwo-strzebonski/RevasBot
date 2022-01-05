@@ -144,7 +144,7 @@ class RevasScrapper:
         if count:
             data = {
                 key: value for d in [
-                    self.revas_selenium.serialize_shop(i) for i in range(count)
+                    self.revas_selenium.get_products(i) for i in range(count)
                 ] for key, value in d.items()
             }
 

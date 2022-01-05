@@ -17,3 +17,7 @@ class RevasPandas:
                 data_frame.to_excel(writer, sheet_name=key)
 
             writer.save()
+
+    @classmethod
+    def read_csv(cls, path: str) -> dict[str, dict[str, str]]:
+        return pd.read_csv(path).to_dict()

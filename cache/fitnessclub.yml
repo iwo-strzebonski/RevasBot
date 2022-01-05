@@ -17,291 +17,291 @@ offer:
   33: "Wymagania dotycz\u0105ce us\u0142ugi-Step br (wej\u015Bcie jednorazowe).xlsx"
   35: "Wymagania dotycz\u0105ce us\u0142ugi-Zumba br (wej\u015Bcie jednorazowe).xlsx"
 resources:
-  partSupplierHasPartID_1954:
+  '1954':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 1
     shop: bis
-  partSupplierHasPartID_1955:
+  '1955':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 1
     shop: dealtag
-  partSupplierHasPartID_1956:
+  '1956':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 1
     shop: fullservice
-  partSupplierHasPartID_1957:
+  '1957':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 1
     shop: intershop
-  partSupplierHasPartID_1958:
+  '1958':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 1
     shop: officeshop
-  partSupplierHasPartID_1959:
+  '1959':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 1
     shop: traftixx
-  partSupplierHasPartID_1960:
+  '1960':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 2
     shop: bis
-  partSupplierHasPartID_1961:
+  '1961':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 2
     shop: dealtag
-  partSupplierHasPartID_1962:
+  '1962':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 2
     shop: fullservice
-  partSupplierHasPartID_1963:
+  '1963':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 2
     shop: intershop
-  partSupplierHasPartID_1964:
+  '1964':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 2
     shop: officeshop
-  partSupplierHasPartID_1965:
+  '1965':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 2
     shop: traftixx
-  partSupplierHasPartID_1966:
+  '1966':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 3
     shop: bis
-  partSupplierHasPartID_1967:
+  '1967':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 3
     shop: dealtag
-  partSupplierHasPartID_1968:
+  '1968':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 3
     shop: fullservice
-  partSupplierHasPartID_1969:
+  '1969':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 3
     shop: intershop
-  partSupplierHasPartID_1970:
+  '1970':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 3
     shop: officeshop
-  partSupplierHasPartID_1971:
+  '1971':
     name: "nap\xF3j izotoniczny opakowanie (24 szt.)"
     quality: 3
     shop: traftixx
-  partSupplierHasPartID_2008:
+  '2008':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 1
     shop: bis
-  partSupplierHasPartID_2009:
+  '2009':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 1
     shop: dealtag
-  partSupplierHasPartID_2010:
+  '2010':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 1
     shop: fullservice
-  partSupplierHasPartID_2011:
+  '2011':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 1
     shop: intershop
-  partSupplierHasPartID_2012:
+  '2012':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 1
     shop: officeshop
-  partSupplierHasPartID_2013:
+  '2013':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 1
     shop: traftixx
-  partSupplierHasPartID_2014:
+  '2014':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 2
     shop: bis
-  partSupplierHasPartID_2015:
+  '2015':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 2
     shop: dealtag
-  partSupplierHasPartID_2016:
+  '2016':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 2
     shop: fullservice
-  partSupplierHasPartID_2017:
+  '2017':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 2
     shop: intershop
-  partSupplierHasPartID_2018:
+  '2018':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 2
     shop: officeshop
-  partSupplierHasPartID_2019:
+  '2019':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 2
     shop: traftixx
-  partSupplierHasPartID_2020:
+  '2020':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 3
     shop: bis
-  partSupplierHasPartID_2021:
+  '2021':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 3
     shop: dealtag
-  partSupplierHasPartID_2022:
+  '2022':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 3
     shop: fullservice
-  partSupplierHasPartID_2023:
+  '2023':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 3
     shop: intershop
-  partSupplierHasPartID_2024:
+  '2024':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 3
     shop: officeshop
-  partSupplierHasPartID_2025:
+  '2025':
     name: "r\u0119cznik papierowy opakowanie (1000 szt.)"
     quality: 3
     shop: traftixx
-  partSupplierHasPartID_2044:
+  '2044':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 1
     shop: bis
-  partSupplierHasPartID_2045:
+  '2045':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 1
     shop: dealtag
-  partSupplierHasPartID_2046:
+  '2046':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 1
     shop: fullservice
-  partSupplierHasPartID_2047:
+  '2047':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 1
     shop: intershop
-  partSupplierHasPartID_2048:
+  '2048':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 1
     shop: officeshop
-  partSupplierHasPartID_2049:
+  '2049':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 1
     shop: traftixx
-  partSupplierHasPartID_2050:
+  '2050':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 2
     shop: bis
-  partSupplierHasPartID_2051:
+  '2051':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 2
     shop: dealtag
-  partSupplierHasPartID_2052:
+  '2052':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 2
     shop: fullservice
-  partSupplierHasPartID_2053:
+  '2053':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 2
     shop: intershop
-  partSupplierHasPartID_2054:
+  '2054':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 2
     shop: officeshop
-  partSupplierHasPartID_2055:
+  '2055':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 2
     shop: traftixx
-  partSupplierHasPartID_2056:
+  '2056':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 3
     shop: bis
-  partSupplierHasPartID_2057:
+  '2057':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 3
     shop: dealtag
-  partSupplierHasPartID_2058:
+  '2058':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 3
     shop: fullservice
-  partSupplierHasPartID_2059:
+  '2059':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 3
     shop: intershop
-  partSupplierHasPartID_2060:
+  '2060':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 3
     shop: officeshop
-  partSupplierHasPartID_2061:
+  '2061':
     name: "p\u0142yn do dezynfekcji pojemnik (5 litr\xF3w)"
     quality: 3
     shop: traftixx
-  partSupplierHasPartID_2080:
+  '2080':
     name: woda opakowanie (20 szt.)
     quality: 1
     shop: bis
-  partSupplierHasPartID_2081:
+  '2081':
     name: woda opakowanie (20 szt.)
     quality: 1
     shop: dealtag
-  partSupplierHasPartID_2082:
+  '2082':
     name: woda opakowanie (20 szt.)
     quality: 1
     shop: fullservice
-  partSupplierHasPartID_2083:
+  '2083':
     name: woda opakowanie (20 szt.)
     quality: 1
     shop: intershop
-  partSupplierHasPartID_2084:
+  '2084':
     name: woda opakowanie (20 szt.)
     quality: 1
     shop: officeshop
-  partSupplierHasPartID_2085:
+  '2085':
     name: woda opakowanie (20 szt.)
     quality: 1
     shop: traftixx
-  partSupplierHasPartID_2086:
+  '2086':
     name: woda opakowanie (20 szt.)
     quality: 2
     shop: bis
-  partSupplierHasPartID_2087:
+  '2087':
     name: woda opakowanie (20 szt.)
     quality: 2
     shop: dealtag
-  partSupplierHasPartID_2088:
+  '2088':
     name: woda opakowanie (20 szt.)
     quality: 2
     shop: fullservice
-  partSupplierHasPartID_2089:
+  '2089':
     name: woda opakowanie (20 szt.)
     quality: 2
     shop: intershop
-  partSupplierHasPartID_2090:
+  '2090':
     name: woda opakowanie (20 szt.)
     quality: 2
     shop: officeshop
-  partSupplierHasPartID_2091:
+  '2091':
     name: woda opakowanie (20 szt.)
     quality: 2
     shop: traftixx
-  partSupplierHasPartID_2092:
+  '2092':
     name: woda opakowanie (20 szt.)
     quality: 3
     shop: bis
-  partSupplierHasPartID_2093:
+  '2093':
     name: woda opakowanie (20 szt.)
     quality: 3
     shop: dealtag
-  partSupplierHasPartID_2094:
+  '2094':
     name: woda opakowanie (20 szt.)
     quality: 3
     shop: fullservice
-  partSupplierHasPartID_2095:
+  '2095':
     name: woda opakowanie (20 szt.)
     quality: 3
     shop: intershop
-  partSupplierHasPartID_2096:
+  '2096':
     name: woda opakowanie (20 szt.)
     quality: 3
     shop: officeshop
-  partSupplierHasPartID_2097:
+  '2097':
     name: woda opakowanie (20 szt.)
     quality: 3
     shop: traftixx

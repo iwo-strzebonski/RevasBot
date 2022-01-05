@@ -1,6 +1,6 @@
 __authors__ = ['iwo-strzebonski', 'hoxton314', 'raphaelsanti-source']
 __license__ = 'WTFLP'
-__version__ = '2.0.5'
+__version__ = '2.0.6'
 
 import os
 import shutil
@@ -27,6 +27,11 @@ def init_dirs(game_changed: bool) -> bool:
     try:
         shutil.rmtree('analysis')
     except FileNotFoundError:
+        pass
+
+    try:
+        os.mkdir('shop')
+    except FileExistsError:
         pass
 
     os.mkdir('analysis')
@@ -100,7 +105,8 @@ def setup():
 
     ########
     # Used to buy resources
-    # revas_shopper.buy_resources([{'id': 'partSupplierHasPartID_103', 'amount': '1'}])
+    # revas_shopper.buy_resources([{ 'id': '244', 'amount': '1' }])
+    revas_shopper.buy_resources_from_file(revas_selenium.game_name)
     ########
 
     if not downloads_valid:

@@ -1,8 +1,8 @@
 *.exe
 config.yml
-sequences.txt
+analysis/
 download/
-temp/
+shop/
 .vscode/
 
 # Byte-compiled / optimized / DLL files

@@ -177,7 +177,7 @@ class RevasSelenium:
 
         return dict(zip(scores, data))
 
-    def serialize_shop(self, shop_no: int) -> dict[str, dict[str, str]]:
+    def get_products(self, shop_no: int) -> dict[str, dict[str, str]]:
         buttons = WebDriverWait(self.driver, 3).until(
             EC.presence_of_all_elements_located((
                 By.XPATH,
@@ -203,17 +203,21 @@ class RevasSelenium:
                 'quality': len(
                     row.find_elements(By.XPATH, './/img[contains(@src, "star.svg")]')
                 ),
-                'shop': shop_names[shop_no]
+                'supplier': shop_names[shop_no]
             }
             for row in self.driver.find_elements(By.XPATH, './/tbody/tr')
         ]
 
-        keys = list(filter(lambda key: 'partSupplierHasPartID' in key, {
+        keys = {
             i.split('=')[0]: i.split('=')[1]
             for i in self.execute_script(
                 'return $("#part_database_ajax_frm").serialize()'
             ).split('&')
-        }.keys()))
+        }.keys()
+
+        keys = list(filter(lambda key: 'partSupplierHasPartID' in key, keys))
+
+        keys = [key[key.rindex('_') + 1:] for key in keys]
 
         data = dict(zip(keys, parts))
 

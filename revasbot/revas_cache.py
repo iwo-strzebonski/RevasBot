@@ -1,5 +1,6 @@
 import os
 import sys
+from typing import Any
 import yaml
 
 from revasbot.revas_console import RevasConsole as console
@@ -45,7 +46,7 @@ class RevasCache:
         )
 
     @classmethod
-    def cache_loader(cls, file_name: str) -> dict[str, dict[str, int]]:
+    def cache_loader(cls, file_name: str) -> dict[str, Any]:
         with open(
             os.path.join('cache', file_name + '.yml'),
             'r', encoding='utf-8'
