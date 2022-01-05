@@ -2,6 +2,7 @@ import os
 
 from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
+from revasbot.revas_cache import RevasCache
 from revasbot.revas_selenium import RevasSelenium
 from revasbot.revas_pandas import RevasPandas
 
@@ -16,10 +17,10 @@ class RevasScrapper:
                 'id': 'partSupplierID',
                 'action': 'suppliers'
             },
-            'finance_bank': {
-                'id': 'bankID',
-                'action': 'finance-bank'
-            },
+            # 'finance_bank': {
+            #     'id': 'bankID',
+            #     'action': 'finance-bank'
+            # },
             'hr_employment': {
                 'id': 'positionID',
                 'action': 'employes'
@@ -28,10 +29,15 @@ class RevasScrapper:
 
         self.revas_selenium = revas_selenium
 
-    def smart_scrap_xlsx(self, game_name: str) -> None:
-        config = RevasCore.cache_loader(game_name)
+    def smart_scrap_xlsx(self) -> None:
+        config = RevasCache.cache_loader(
+            self.revas_selenium.game_name
+        )
 
         for key, id_list in config.items():
+            if not key in self.special_pages:
+                continue
+
             page_info = self.special_pages[key]
 
             for item_id in id_list.keys():
@@ -53,7 +59,7 @@ class RevasScrapper:
                     )
                 )
 
-    def scrap_xlsxs(self, game_name: str) -> None:
+    def scrap_xlsxs(self) -> None:
         cache_data = {}
 
         for key, value in self.special_pages.items():
@@ -64,10 +70,11 @@ class RevasScrapper:
 
             i = 0
 
-            if key in ['finance_bank', 'hr_employment']:
+            if key == 'hr_employment':
                 item_id = 1
             else:
                 count = self.revas_selenium.get_data_count(key)
+                count = 6 if not count else count
 
             while i < count:
                 item_data = (
@@ -98,16 +105,55 @@ class RevasScrapper:
 
                 item_id += 1
 
-        RevasCore.cache_saver(game_name, cache_data)
+        RevasCache.cache_saver(
+            self.revas_selenium.game_name, cache_data
+        )
         self.revas_selenium.driver.back()
+
+    def scrap_finance_bank(self):
+        item_data = (
+            'bankID',
+            '1',
+            'finance_bank',
+            'finance-bank'
+        )
+
+        spreadsheet = self.revas_selenium.get_xlsx(item_data)
+
+        os.rename(
+            os.path.join(RevasCore.home_path(), spreadsheet),
+            os.path.join(
+                'download',
+                'finance_bank',
+                spreadsheet
+            )
+        )
 
     def scrap_scores(self) -> None:
         if self.revas_selenium.round_no > 2:
             scores = self.revas_selenium.get_scores()
             RevasPandas.dict_to_xlsx(
-                scores,
-                f'download/scores/sales_round_{self.revas_selenium.round_no}.xlsx'
+                scores, 'download/scores/sales.xlsx'
             )
-            # https://restauracja.revas.pl/ajax.php?mod=sale&tab=results
         else:
             console.warn('Wyniki dostępne od rundy 3')
+
+    def scrap_products(self) -> None:
+        count = self.revas_selenium.get_data_count('suppliers')
+
+        if count:
+            data = {
+                key: value for d in [
+                    self.revas_selenium.serialize_shop(i) for i in range(count)
+                ] for key, value in d.items()
+            }
+
+            RevasCache.update_cache(
+                self.revas_selenium.game_name, 'resources', data
+            )
+
+            # 'parts_table_length': '100'
+        else:
+            console.warn('Lista dostawców jest niedostępna, nie można pobrać listy produktów')
+
+        # self.revas_selenium.driver.back()

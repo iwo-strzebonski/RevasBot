@@ -1,4 +1,4 @@
 class RevasCalculations:
-    '''Functions connected to calculations go there
+    '''Functions related to calculations go there
     '''
     pass

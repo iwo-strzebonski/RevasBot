@@ -1,5 +1,3 @@
-finance_bank:
-  1: Historia rachunku.xlsx
 hr_employment:
   1: "Lista pracownik\xF3w dost\u0119pnych na rynku pracy.xlsx"
 offer:
@@ -18,6 +16,331 @@ offer:
   35: "Wymagania dotycz\u0105ce us\u0142ugi-Wymiana gniazda zasilania.xlsx"
   36: "Wymagania dotycz\u0105ce us\u0142ugi-Wykonanie strony www z CMS.xlsx"
   37: "Wymagania dotycz\u0105ce us\u0142ugi-Administrowanie stron\u0105 www.xlsx"
+resources:
+  partSupplierHasPartID_103:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_104:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_105:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_106:
+    name: grafika do strony www
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_107:
+    name: grafika do strony www
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_108:
+    name: grafika do strony www
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_244:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_245:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_246:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_316:
+    name: system operacyjny
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_317:
+    name: system operacyjny
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_318:
+    name: system operacyjny
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_346:
+    name: gniazdo zasilania
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_347:
+    name: gniazdo zasilania
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_348:
+    name: gniazdo zasilania
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_355:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_356:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_357:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_358:
+    name: grafika do strony www
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_359:
+    name: grafika do strony www
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_360:
+    name: grafika do strony www
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_370:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_371:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_372:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_472:
+    name: system operacyjny
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_473:
+    name: system operacyjny
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_474:
+    name: system operacyjny
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_502:
+    name: gniazdo zasilania
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_503:
+    name: gniazdo zasilania
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_504:
+    name: gniazdo zasilania
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_511:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_512:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_513:
+    name: "p\u0142yta g\u0142\xF3wna"
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_514:
+    name: grafika do strony www
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_515:
+    name: grafika do strony www
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_516:
+    name: grafika do strony www
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_526:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_527:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_528:
+    name: alkohol izopropylowy pojemnik (1000 ml)
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_64:
+    name: system operacyjny
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_65:
+    name: system operacyjny
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_66:
+    name: system operacyjny
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_736:
+    name: router
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_737:
+    name: router
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_738:
+    name: router
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_742:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_743:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_744:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_781:
+    name: router
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_782:
+    name: router
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_783:
+    name: router
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_787:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_788:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_789:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_796:
+    name: router
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_797:
+    name: router
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_798:
+    name: router
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_802:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_803:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_804:
+    name: "pasta termoprzewodz\u0105ca tubka (2 gramy)"
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_874:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_875:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_876:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_877:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_878:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_879:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_880:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_881:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_882:
+    name: "spr\u0119\u017Cone powietrze pojemnik (400 ml)"
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_901:
+    name: matryca
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_902:
+    name: matryca
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_903:
+    name: matryca
+    quality: 3
+    shop: fullservice
+  partSupplierHasPartID_904:
+    name: matryca
+    quality: 1
+    shop: electroshop
+  partSupplierHasPartID_905:
+    name: matryca
+    quality: 2
+    shop: electroshop
+  partSupplierHasPartID_906:
+    name: matryca
+    quality: 3
+    shop: electroshop
+  partSupplierHasPartID_925:
+    name: matryca
+    quality: 1
+    shop: intershop
+  partSupplierHasPartID_926:
+    name: matryca
+    quality: 2
+    shop: intershop
+  partSupplierHasPartID_927:
+    name: matryca
+    quality: 3
+    shop: intershop
+  partSupplierHasPartID_94:
+    name: gniazdo zasilania
+    quality: 1
+    shop: fullservice
+  partSupplierHasPartID_95:
+    name: gniazdo zasilania
+    quality: 2
+    shop: fullservice
+  partSupplierHasPartID_96:
+    name: gniazdo zasilania
+    quality: 3
+    shop: fullservice
 suppliers:
   1: Dostawca-FullService.xlsx
   2: Dostawca-InterShop.xlsx

@@ -1,7 +1,7 @@
 import sys
 import os
 from time import sleep
-from typing import Tuple
+from typing import Any
 
 from selenium.webdriver import Edge
 
@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.common.exceptions import TimeoutException
@@ -17,6 +17,7 @@ from selenium.common.exceptions import TimeoutException
 # from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
 from revasbot.revas_pandas import RevasPandas
+from revasbot.revas_cache import RevasCache
 
 class RevasSelenium:
     usr_name = ''
@@ -54,7 +55,6 @@ class RevasSelenium:
         games = RevasCore.get_games(self.driver)
         self.game_id, self.company_name = RevasCore.choose_game(games)
 
-        self.get_schedule()
         self.driver.find_element(By.ID, f'join_btn_{self.game_id}').click()
 
         round_no = WebDriverWait(self.driver, 3).until(
@@ -63,9 +63,11 @@ class RevasSelenium:
 
         url = self.driver.current_url
 
-        self.url = url[:url.index('.pl/') + 4]
+        self.url = url[:url.rindex('/') + 1]
         self.game_name = url[8 : url.index('.')]
         self.round_no = int(round_no)
+
+        RevasCache.store_game_name(self.game_name)
 
     def get_data_count(self, mod: str) -> int:
         self.driver.get(self.url + mod + '.php')
@@ -75,13 +77,11 @@ class RevasSelenium:
                 EC.presence_of_element_located((By.CLASS_NAME, 'light-well-item'))
             )
 
-            count = len(self.driver.find_elements(By.CLASS_NAME, 'light-well-item'))
+            return len(self.driver.find_elements(By.CLASS_NAME, 'light-well-item'))
         except TimeoutException:
-            count = 6
+            return 0
 
-        return count
-
-    def get_xlsx(self, item_data: Tuple[str, str, str, str]) -> str:
+    def get_xlsx(self, item_data: tuple[str, str, str, str]) -> str:
         id_name, item_id, mod, action = item_data
 
         download_url = \
@@ -106,12 +106,14 @@ class RevasSelenium:
         return ''
 
     def get_schedule(self) -> None:
-        schedule_path = self.driver.find_element(
-            By.XPATH,
-            f'//TR[TD/BUTTON/@playergameid={self.game_id}]/TD/A[@data-toggle]'
-        ).get_attribute('href')
+        self.driver.get('https://gry.revas.pl/default.php')
 
-        # console.debug(schedule_path)
+        schedule_path = WebDriverWait(self.driver, 3).until(
+            EC.presence_of_element_located((
+                By.XPATH,
+                f'//TR[TD/BUTTON/@playergameid={self.game_id}]/TD/A[@data-toggle]'
+            ))
+        ).get_attribute('href')
 
         self.driver.get(schedule_path)
 
@@ -147,6 +149,7 @@ class RevasSelenium:
 
         self.driver.minimize_window()
         self.driver.back()
+        self.driver.back()
 
     def get_scores(self) -> dict[str, dict[str, int]]:
         self.driver.get(f'{self.url}ajax.php?mod=sale&tab=results')
@@ -173,6 +176,53 @@ class RevasSelenium:
         self.driver.back()
 
         return dict(zip(scores, data))
+
+    def serialize_shop(self, shop_no: int) -> dict[str, dict[str, str]]:
+        buttons = WebDriverWait(self.driver, 3).until(
+            EC.presence_of_all_elements_located((
+                By.XPATH,
+                './/a[contains(@class, "btn-more") and not(contains(@class, "supplier-basket"))]'
+            ))
+        )
+        shop_names = [
+            shop.text.lower()
+            for shop in self.driver.find_elements(By.CLASS_NAME, 'light-well-title')
+        ]
+
+        buttons[shop_no].click()
+
+        Select(WebDriverWait(self.driver, 3).until(
+            EC.element_to_be_clickable((By.TAG_NAME, 'select'))
+        )).select_by_value('100')
+
+        parts = [
+            {
+                'name': row.find_element(
+                    By.CLASS_NAME, 'container_name_info'
+                ).text.lower().replace('\n', ' '),
+                'quality': len(
+                    row.find_elements(By.XPATH, './/img[contains(@src, "star.svg")]')
+                ),
+                'shop': shop_names[shop_no]
+            }
+            for row in self.driver.find_elements(By.XPATH, './/tbody/tr')
+        ]
+
+        keys = list(filter(lambda key: 'partSupplierHasPartID' in key, {
+            i.split('=')[0]: i.split('=')[1]
+            for i in self.execute_script(
+                'return $("#part_database_ajax_frm").serialize()'
+            ).split('&')
+        }.keys()))
+
+        data = dict(zip(keys, parts))
+
+        self.driver.refresh()
+
+        return data
+
+    def execute_script(self, script: str) -> Any:
+        return self.driver.execute_script(script)
 
     def quit(self, timeout: float=0) -> None:
         sleep(timeout)

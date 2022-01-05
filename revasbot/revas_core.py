@@ -1,9 +1,5 @@
-from typing import Tuple
-
 import os
-import sys
 import platform
-import yaml
 
 from selenium.webdriver.common.by import By
 from revasbot.revas_console import RevasConsole as console
@@ -12,60 +8,6 @@ if platform.system() == 'Windows':
     import winreg
 
 class RevasCore:
-    @classmethod
-    def config_loader(cls) -> Tuple[str, str]:
-        try:
-            with open('config.yml', 'r', encoding='utf-8') as conf_file:
-                config = yaml.load(conf_file, Loader=yaml.FullLoader)
-
-        except FileNotFoundError:
-            usr_name = console.input('Type your Revas account username: ')
-            passwd = console.getpass('Type your Revas account password: ')
-
-            while any(i == '' for i in [usr_name, passwd]):
-                console.warn('Please provide user data!')
-                usr_name = console.input('Type your Revas account username: ')
-                passwd = console.getpass('Type your Revas account password: ')
-
-            with open('config.yml', 'w', encoding='utf-8') as conf_file:
-                yaml.dump({
-                    'USER': usr_name,
-                    'PASSWD': passwd
-                }, conf_file)
-
-            console.debug('No config.yml found, creating a new one...')
-            config = {
-                'USER': usr_name,
-                'PASSWD': passwd,
-            }
-
-        if any(config[key] is None for key in config):
-            console.error('Please provide user data!')
-            sys.exit()
-
-        return (
-            str(config['USER']),
-            str(config['PASSWD'])
-        )
-
-    @classmethod
-    def cache_loader(cls, file_name: str) -> dict[str, dict[str, int]]:
-        with open(
-            os.path.join('cache', file_name + '.yml'),
-            'r', encoding='utf-8'
-        ) as cached_file:
-            config = yaml.load(cached_file, Loader=yaml.FullLoader)
-
-        return config
-
-    @classmethod
-    def cache_saver(cls, file_name: str, data: dict[str, dict[str, int]]) -> None:
-        with open(
-            os.path.join('cache', file_name + '.yml'),
-            'w', encoding='utf-8'
-        ) as cached_file:
-            yaml.dump(data, cached_file)
-
     @classmethod
     def get_games(cls, driver) -> list[dict[str, str]]:
         table = driver.find_element(By.ID, 'player_games')
