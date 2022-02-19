@@ -1,9 +1,10 @@
 import os
+import shutil
 
 from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
 from revasbot.revas_cache import RevasCache
-from revasbot.revas_selenium import RevasSelenium
+from revasbot.selenium.revas_selenium import RevasSelenium
 from revasbot.revas_pandas import RevasPandas
 
 class RevasScrapper:
@@ -50,7 +51,7 @@ class RevasScrapper:
 
                 spreadsheet = self.revas_selenium.get_xlsx(item_data)
 
-                os.rename(
+                shutil.move(
                     os.path.join(RevasCore.home_path(), spreadsheet),
                     os.path.join(
                         'download',
@@ -90,7 +91,7 @@ class RevasScrapper:
                     cache_data[key][item_id] = spreadsheet
                     console.debug(str(item_id) + ': ' + spreadsheet)
 
-                    os.rename(
+                    shutil.move(
                         os.path.join(RevasCore.home_path(), spreadsheet),
                         os.path.join(
                             'download',
@@ -120,7 +121,7 @@ class RevasScrapper:
 
         spreadsheet = self.revas_selenium.get_xlsx(item_data)
 
-        os.rename(
+        shutil.move(
             os.path.join(RevasCore.home_path(), spreadsheet),
             os.path.join(
                 'download',

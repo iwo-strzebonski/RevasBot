@@ -15,7 +15,7 @@ import revasbot
 from revasbot.revas_console import RevasConsole as console
 
 if __name__ == '__main__':
-    console.info(str(revasbot.__authors__))
+    console.info(revasbot.__author__)
     console.info(revasbot.__version__)
     console.info(revasbot.__license__)
     revasbot.setup()

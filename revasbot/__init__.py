@@ -1,14 +1,14 @@
-__authors__ = ['iwo-strzebonski', 'hoxton314', 'raphaelsanti-source']
+__author__ = 'iwo-strzebonski'
 __license__ = 'WTFLP'
-__version__ = '2.0.6'
+__version__ = '2.1.0'
 
 import os
 import shutil
 
 from revasbot.revas_core import RevasCore
 from revasbot.revas_cache import RevasCache
-from revasbot.revas_selenium import RevasSelenium
-from revasbot.revas_scrapper import RevasScrapper
+from revasbot.selenium.revas_selenium import RevasSelenium
+from revasbot.selenium.revas_scrapper import RevasScrapper
 from revasbot.revas_shopper import RevasShopper
 
 def clear_xlsx() -> None:
@@ -86,6 +86,8 @@ def init_scrapper(revas_scrapper: RevasScrapper, game_name: str) -> None:
         revas_scrapper.scrap_xlsxs()
 
 def setup():
+    '''Starts the RevasBot
+    '''
     clear_xlsx()
 
     user_name, password, last_game_name = RevasCache.config_loader()
@@ -103,13 +105,15 @@ def setup():
     revas_scrapper.scrap_scores()
     revas_scrapper.scrap_products()
 
-    ########
-    # Used to buy resources
-    # revas_shopper.buy_resources([{ 'id': '244', 'amount': '1' }])
-    revas_shopper.buy_resources_from_file(revas_selenium.game_name)
-    ########
-
     if not downloads_valid:
         init_scrapper(revas_scrapper, revas_selenium.game_name)
+
+    ########
+    # Used to buy resources
+    buy_resources = input('Do you want to buy resources from a CSV file? [Y/n]: ')
+    if buy_resources not in { 'n', 'N' }:
+        # revas_shopper.buy_resources([{ 'id': '244', 'amount': '1' }])
+        revas_shopper.buy_resources_from_file(revas_selenium.game_name)
+    ########
 
     revas_selenium.quit()

@@ -16,7 +16,7 @@ class RevasCache:
             usr_name = console.input('Type your Revas account username: ')
             passwd = console.getpass('Type your Revas account password: ')
 
-            while any(i == '' for i in [usr_name, passwd]):
+            while any(i == '' for i in { usr_name, passwd }):
                 console.warn('Please provide user data!')
                 usr_name = console.input('Type your Revas account username: ')
                 passwd = console.getpass('Type your Revas account password: ')

@@ -3,12 +3,8 @@ import os
 from time import sleep
 from typing import Any
 
-from selenium.webdriver import Edge
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -18,6 +14,7 @@ from selenium.common.exceptions import TimeoutException
 from revasbot.revas_core import RevasCore
 from revasbot.revas_pandas import RevasPandas
 from revasbot.revas_cache import RevasCache
+from revasbot.selenium.revas_drivers import select_driver
 
 class RevasSelenium:
     usr_name = ''
@@ -29,15 +26,7 @@ class RevasSelenium:
     round_no = 0
 
     def __init__(self, usr_name: str, passwd: str) -> None:
-        caps = DesiredCapabilities().EDGE.copy()
-        caps['pageLoadStrategy'] = 'eager'
-
-        self.driver = Edge(capabilities=caps)
-        # self.driver.maximize_window()
-        self.driver.set_window_size(800, 600)
-        self.driver.minimize_window()
-
-        self.driver.get('https://gry.revas.pl/')
+        self.driver = select_driver()
 
         self.usr_name = usr_name
         self.passwd = passwd
