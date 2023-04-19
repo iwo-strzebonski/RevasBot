@@ -154,9 +154,12 @@ class RevasSelenium:
             {
                 row.find_elements(
                     By.TAG_NAME, 'td'
-                )[0].text: int(row.find_elements(
-                    By.TAG_NAME, 'td'
-                )[1].text)
+                )[0].text:
+                    float(
+                        row.find_elements(By.TAG_NAME, 'td')[1].text.replace(' %', 'e-2')
+                        if '%' in row.find_elements(By.TAG_NAME, 'td')[1].text
+                        else row.find_elements(By.TAG_NAME, 'td')[1].text
+                    )
                 for row in body.find_elements(By.TAG_NAME, 'tr')
             }
             for body in self.driver.find_elements(By.TAG_NAME, 'tbody')
