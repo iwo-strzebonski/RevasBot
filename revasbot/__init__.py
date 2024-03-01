@@ -100,18 +100,23 @@ def setup():
     revas_scrapper = RevasScrapper(revas_selenium)
     revas_shopper = RevasShopper(revas_selenium.execute_script)
 
-    revas_selenium.get_schedule()
-    revas_scrapper.scrap_finance_bank()
-    revas_scrapper.scrap_scores()
-    revas_scrapper.scrap_products()
+    ########
+    # You can skip download now!
+    scrap_data = input('Do you want to download data from Revas (you can skip if you already downloaded them)? [Y/n]: ')
+    if scrap_data not in { 'n', 'N' }:  # 'Y' or 'y' or ''
+        revas_selenium.get_schedule()
+        revas_scrapper.scrap_finance_bank()
+        revas_scrapper.scrap_scores()
+        revas_scrapper.scrap_products()
 
-    if not downloads_valid:
-        init_scrapper(revas_scrapper, revas_selenium.game_name)
+        if not downloads_valid:
+            init_scrapper(revas_scrapper, revas_selenium.game_name)
+    ########
 
     ########
     # Used to buy resources
     buy_resources = input('Do you want to buy resources from a CSV file? [Y/n]: ')
-    if buy_resources not in { 'n', 'N' }:
+    if buy_resources not in { 'n', 'N' }:  # 'Y' or 'y' or ''
         # revas_shopper.buy_resources([{ 'id': '244', 'amount': '1' }])
         revas_shopper.buy_resources_from_file(revas_selenium.game_name)
     ########

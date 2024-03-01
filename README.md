@@ -100,6 +100,8 @@ RevasBot uses ANSI codes for colorful messages.
 On Windows, if you are using `Command Line`,
 you need to install [ansicon](https://github.com/adoxa/ansicon/).
 
+Works straight out of the box on `PowerShell` without any additional software.
+
 ### Change Python file according to PEP-8 **IN-PLACE**
 
 ```cmd

@@ -142,6 +142,9 @@ class RevasScrapper:
     def scrap_products(self) -> None:
         count = self.revas_selenium.get_data_count('suppliers')
 
+        # HACK: Since recently, you need to maximize the window to get the list of products
+        self.revas_selenium.driver.maximize_window()
+
         if count:
             data = {
                 key: value for d in [

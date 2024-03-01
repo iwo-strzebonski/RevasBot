@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.common.exceptions import TimeoutException
 
-# from revasbot.revas_console import RevasConsole as console
+from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
 from revasbot.revas_pandas import RevasPandas
 from revasbot.revas_cache import RevasCache
@@ -47,8 +47,8 @@ class RevasSelenium:
         self.driver.find_element(By.ID, f'join_btn_{self.game_id}').click()
 
         round_no = WebDriverWait(self.driver, 3).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'tab-month-round'))
-        ).text.split()[2]
+            EC.presence_of_element_located((By.CLASS_NAME, 'current-round-number'))
+        ).text.split()[0]
 
         url = self.driver.current_url
 
@@ -158,7 +158,7 @@ class RevasSelenium:
                     float(
                         row.find_elements(By.TAG_NAME, 'td')[1].text.replace(' %', 'e-2')
                         if '%' in row.find_elements(By.TAG_NAME, 'td')[1].text
-                        else row.find_elements(By.TAG_NAME, 'td')[1].text
+                        else row.find_elements(By.TAG_NAME, 'td')[1].text.replace(' ', '')
                         if len(row.find_elements(By.TAG_NAME, 'td')[1].text)
                         else 0
                     )
@@ -185,9 +185,18 @@ class RevasSelenium:
 
         buttons[shop_no].click()
 
-        Select(WebDriverWait(self.driver, 3).until(
-            EC.element_to_be_clickable((By.TAG_NAME, 'select'))
-        )).select_by_value('100')
+        # HACK: This is a workaround for the select element not being found
+        # Normally I would use the WebDriverWait, but it doesn't work here
+
+        sleep(1)
+
+        # Select(WebDriverWait(self.driver, 3).until(
+        #     EC.element_to_be_clickable((By.TAG_NAME, 'select'))
+        # )).select_by_value('100')
+
+        Select(
+            self.driver.find_element(By.TAG_NAME, 'select')
+        ).select_by_value('100')
 
         parts = [
             {
@@ -198,8 +207,7 @@ class RevasSelenium:
                     row.find_elements(By.XPATH, './/img[contains(@src, "star.svg")]')
                 ),
                 'supplier': shop_names[shop_no]
-            }
-            for row in self.driver.find_elements(By.XPATH, './/tbody/tr')
+            } for row in self.driver.find_elements(By.XPATH, './/tbody/tr')
         ]
 
         keys = {

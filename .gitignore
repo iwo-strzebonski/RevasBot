@@ -2,7 +2,7 @@
 config.yml
 analysis/
 download/
-shop/
+shop/resources.csv
 .vscode/
 
 # Byte-compiled / optimized / DLL files

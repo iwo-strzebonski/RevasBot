@@ -56,7 +56,7 @@ def get_driver(browser: str = 'edge'):
     else: # defaults to Edge
         driver = Edge(capabilities=caps)
 
-    driver.set_window_size(800, 600)
+    driver.set_window_size(1200, 600)
     driver.minimize_window()
     # self.driver.maximize_window()
 

@@ -27,9 +27,9 @@ class RevasShopper:
             resource['supplier'] == cached['supplier']
 
     @classmethod
-    def get_first_resource(
+    def get_first_resource_by_resource_data(
         cls, resource: dict[str, str], cached_resources: dict[str, dict[str, str]]
-    ):
+    ) -> dict[str, str]:
         return next(filter(
             lambda index: cls.filter_resources(
                 resource, cached_resources[index]
@@ -52,7 +52,8 @@ class RevasShopper:
 
             to_buy_list = [
                 {
-                    'id': self.get_first_resource(resource, cached_resources),
+                    # Now user can use either 'id' or resource data to buy resources
+                    'id': resource['id'] if 'id' in resource else self.get_first_resource_by_resource_data(resource, cached_resources),
                     'amount': resource['amount']
                 } for resource in resources_list
             ]
