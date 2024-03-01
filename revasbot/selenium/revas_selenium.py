@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.common.exceptions import TimeoutException
 
-from revasbot.revas_console import RevasConsole as console
+# from revasbot.revas_console import RevasConsole as console
 from revasbot.revas_core import RevasCore
 from revasbot.revas_pandas import RevasPandas
 from revasbot.revas_cache import RevasCache
